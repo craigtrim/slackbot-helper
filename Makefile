@@ -48,7 +48,8 @@ freeze:
 
 all:
 	make build
-	make mypy
+# 	20221007; mypy is incredibly brutal ...
+#	make mypy
 	make linters
 	make pyc
 	make freeze

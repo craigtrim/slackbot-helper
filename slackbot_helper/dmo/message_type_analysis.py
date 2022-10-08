@@ -3,12 +3,15 @@
 """ Analyze the Message Text into Structured Outcomes """
 
 
+from typing import List
+from typing import Optional
+
 from baseblock import EnvIO
 from baseblock import Stopwatch
 from baseblock import BaseObject
 
-from climate_bot.app_mention.dto import FindSlackIDs
-from climate_bot.app_mention.dto import MessageType
+from slackbot_helper.dto import SlackIds
+from slackbot_helper.dto import MessageType
 
 
 class MessageTypeAnalysis(BaseObject):
@@ -25,9 +28,9 @@ class MessageTypeAnalysis(BaseObject):
     }
 
     def __init__(self,
-                 user_ids: list,
+                 user_ids: SlackIds,
                  message_text: str,
-                 bot_ids: list):
+                 bot_ids: SlackIds):
         """ Change Log
 
         Created:
@@ -54,16 +57,11 @@ class MessageTypeAnalysis(BaseObject):
             *   refactored into 'slackbot-helper'
 
         Args:
-            user_ids (list): a list of 0..* user ids extracted from the message text
+            user_ids (SlackIds): a list of 0..* user ids extracted from the message text
             message_text (str): the actual message text
-            bot_ids (list): a list of Bot IDs
+            bot_ids (SlackIds): a list of Bot IDs
         """
         BaseObject.__init__(self, __name__)
-        self._id_finder = FindSlackIDs()
-
-        # this is the currently running bot on this thread
-        self._this_bot = EnvIO.str_or_exception('BOT_NAME')
-
         self._bot_ids = bot_ids
         self._user_ids = user_ids
         self._message_text = message_text
@@ -77,10 +75,10 @@ class MessageTypeAnalysis(BaseObject):
     def _analyze_type(self) -> MessageType:
 
         bot_ids = [x for x in self._user_ids
-                   if x in self._id_finder.bot_ids()]
+                   if x in self._bot_ids]
 
         human_ids = [x for x in self._user_ids
-                     if x not in self._id_finder.bot_ids()]
+                     if x not in self._bot_ids]
 
         if len(bot_ids) == 0:
             if len(human_ids) == 1:
@@ -119,7 +117,7 @@ class MessageTypeAnalysis(BaseObject):
         return message_text.strip()
 
     def _extract_command(self,
-                         message_text: str) -> list:
+                         message_text: str) -> List[str]:
         """ Extract a Routing Command from the Text
 
         This is like an easter egg the user can embed in the text
@@ -137,12 +135,10 @@ class MessageTypeAnalysis(BaseObject):
         # if EnvIO.is_false('PERSIST_EVENTS'):
         #     commands.add('NO_PERSIST')
 
-        bot_id = EnvIO.str_or_exception('BOT_UUID')
-
         if ':' not in message_text:
             return list(commands)
 
-        def find_command(value: str) -> str or None:
+        def find_command(value: str) -> Optional[str]:
             if value in self.__d_known_commands:
                 return self.__d_known_commands[value]
             return None

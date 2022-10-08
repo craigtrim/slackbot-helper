@@ -3,25 +3,37 @@
 """ Define Strict Types for the Project """
 
 
-from typing import Any
-from typing import AnyStr
+from ast import Str
 from typing import List
-from typing import Dict
-from typing import Tuple
 from typing import TypedDict
+from typing import NewType
 
 
-class NormalizedEvent(TypedDict):
-    event: Dict
-    analysis: Dict
-    membership: AnyStr
+SlackIds = NewType("SlackIds", List[str])
+
+
+class AnalyzedEvent(TypedDict):
+    commands: List[str]
+    meta_mode: str
+    meta_type: str
+    text_1: str
+    text_2: str
+    user_all: SlackIds
+    user_source: str
+    user_target: str
 
 
 class IncomingEvent(TypedDict):
-    blocks: List
-    channel: AnyStr
-    team: AnyStr
-    text: AnyStr
-    ts: AnyStr
-    type: AnyStr
-    user: AnyStr
+    blocks: List[str]
+    channel: str
+    team: str
+    text: str
+    ts: str
+    type: str
+    user: str
+
+
+class NormalizedEvent(TypedDict):
+    event: IncomingEvent
+    analysis: AnalyzedEvent
+    membership: str

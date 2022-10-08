@@ -5,14 +5,20 @@
 
 from pprint import pformat
 
+from typing import List
+from typing import Optional
+
 from baseblock import Stopwatch
 from baseblock import BaseObject
+
+from slackbot_helper.dto import SlackIds
+from slackbot_helper.dto import IncomingEvent
 
 
 class UserIdExtract(BaseObject):
     """ Extract the User IDs from an Incoming Slack Event """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Change Log
 
         Created:
@@ -37,7 +43,7 @@ class UserIdExtract(BaseObject):
         BaseObject.__init__(self, __name__)
 
     def _extract_ids(self,
-                     message_text: str) -> list or None:
+                     message_text: str) -> Optional[List]:
         """ Extract User IDs from Message Text
 
         Sample Transformation Steps:
@@ -63,7 +69,8 @@ class UserIdExtract(BaseObject):
         return lines
 
     def _process(self,
-                 d_event: dict) -> list or None:
+                 d_event: IncomingEvent) -> Optional[List]:
+
         def log_error(message: str) -> None:
             self.logger.error('\n'.join([
                 message,
@@ -115,7 +122,7 @@ class UserIdExtract(BaseObject):
         return user_id.strip()
 
     def process(self,
-                d_event: dict) -> list or None:
+                d_event: IncomingEvent) -> SlackIds:
         """ Extract User Name
 
         Args:

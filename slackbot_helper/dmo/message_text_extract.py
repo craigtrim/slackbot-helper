@@ -3,16 +3,20 @@
 """ Extract the Message Text from an Incoming Slack Events """
 
 
+from typing import List
+from typing import Optional
 from pprint import pformat
 
 from baseblock import Stopwatch
 from baseblock import BaseObject
 
+from slackbot_helper.dto import IncomingEvent
+
 
 class MessageTextExtract(BaseObject):
     """ Extract the Message Text from an Incoming Slack Events """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Change Log
 
         Created:
@@ -37,7 +41,7 @@ class MessageTextExtract(BaseObject):
         BaseObject.__init__(self, __name__)
 
     @staticmethod
-    def _to_string(results: list) -> str:
+    def _to_string(results: List[str]) -> str:
         message_text = ' '.join(results)
         if '\n' in message_text:
             message_text = message_text.replace('\n', ' ')
@@ -89,7 +93,7 @@ class MessageTextExtract(BaseObject):
         raise NotImplementedError
 
     def process(self,
-                d_event: dict) -> str or None:
+                d_event: IncomingEvent) -> Optional[str]:
         """ Extract Message Text
 
         Args:

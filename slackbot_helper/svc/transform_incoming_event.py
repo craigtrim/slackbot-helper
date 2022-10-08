@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+
 """ Transform an Incoming Mention Event """
 
 
@@ -9,6 +10,7 @@ from baseblock import BaseObject
 from baseblock import Enforcer
 
 from slackbot_helper.dto import IncomingEvent
+from slackbot_helper.dto import NormalizedEvent
 
 
 class TransformIncomingEvent(BaseObject):
@@ -17,7 +19,7 @@ class TransformIncomingEvent(BaseObject):
     TODO: this is a candidate for a slackbot-toolkit MSS
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Change Log
 
         Created:
@@ -37,7 +39,7 @@ class TransformIncomingEvent(BaseObject):
         BaseObject.__init__(self, __name__)
 
     def process(self,
-                d_event: IncomingEvent) -> dict:
+                d_event: IncomingEvent) -> NormalizedEvent:
         """ Transform and Validate Incoming Event
 
         Reference:

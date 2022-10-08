@@ -1,3 +1,4 @@
+from .bp.create_outgoing_event import CreateOutgoingEvent
 from .bp import *
 from .svc import *
 from .dmo import *
@@ -53,3 +54,23 @@ def normalize_event(d_event: dict,
             }
     """
     return NormalizeIncomingEvent(bot_ids).process(d_event)
+
+
+def create_outgoing_event(output_text: str,
+                          d_event_incoming: dict) -> dict:
+    """ Create an Outgoing Slack Event
+
+    Args:
+        output_text (str): the outgoing slack message
+            -   The message to display in Slack to the consumer
+        d_event_incoming (dict): the incoming slack event
+            -   This is required to obtain the channel, thread timestamp (thread_ts) and input text (text)
+            -   It was thought easier to pass the original (non-normalized) Slack event as a parameter value
+                than to request these individual values
+
+    Returns:
+        dict: the outgoing slack event
+    """
+    return CreateOutgoingEvent().process(
+        output_text=output_text,
+        d_event_incoming=d_event_incoming)

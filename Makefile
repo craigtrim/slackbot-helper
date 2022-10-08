@@ -50,6 +50,6 @@ all:
 	make build
 # 	20221007; mypy is incredibly brutal ...
 #	make mypy
-	make linters
+#	make linters
 	make pyc
 	make freeze

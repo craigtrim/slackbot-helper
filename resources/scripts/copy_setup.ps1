@@ -1,7 +1,7 @@
 # Full path of the file
 $file = 'setup.py'
-$ProjectName = "find-reaction"
-$ProjectVersion = "0.1.0"
+$ProjectName = "slackbot-helper"
+$ProjectVersion = "0.1.1"
 
 # remove the file if it exists
 if (Test-Path -Path $file -PathType Leaf) {

@@ -2,10 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 
-import os
-from typing import Callable
-from pprint import pprint
-
 from slackbot_helper.bp import NormalizeIncomingEvent
 from slackbot_helper.dto import SlackIds
 from slackbot_helper import normalize_event

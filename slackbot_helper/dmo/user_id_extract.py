@@ -74,9 +74,9 @@ class UserIdExtract(BaseObject):
         def log_error(message: str) -> None:
             self.logger.error('\n'.join([
                 message,
-                f"\tStart Event Block ---------------------------",
+                "\tStart Event Block ---------------------------",
                 f"\t{pformat(d_event)}",
-                f"\t----------------------------- End Event Block"]))
+                "\t----------------------------- End Event Block"]))
 
         # typically an event that comes from a user ...
         if 'blocks' in d_event:
@@ -102,7 +102,7 @@ class UserIdExtract(BaseObject):
                 # 20220331, GRAFFL-256-1085404768; no user ids is a normal situation
                 return None
 
-            except KeyError as e:
+            except KeyError:
                 log_error("Event Structure Parse Error for Blocks")
                 raise ValueError
 
@@ -154,6 +154,6 @@ class UserIdExtract(BaseObject):
                 self.logger.debug('\n'.join([
                     "User ID Extraction Completed",
                     f"\tTotal Time: {str(sw)}",
-                    f"\tNo User IDs Found"]))
+                    "\tNo User IDs Found"]))
 
         return results

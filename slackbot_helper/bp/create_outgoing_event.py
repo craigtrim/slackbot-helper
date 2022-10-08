@@ -53,6 +53,12 @@ class CreateOutgoingEvent(BaseObject):
             dict: the outgoing slack event
         """
 
+        if not output_text or not len(output_text):
+            return None
+        
+        if not d_event_incoming or type(d_event_incoming) != dict:
+            return None
+
         def get_channel() -> str:
             return d_event_incoming['channel']
 

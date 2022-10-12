@@ -16,11 +16,11 @@ class CreateOutgoingEvent(BaseObject):
 
         Created:
             8-Jul-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   https://github.com/grafflr/slackbot/issues/8
         Updated:
             17-Aug-2022
-            craig@bast.ai
+            craigtrim@gmail.com
             *   fix blank-text defect
                 https://github.com/grafflr/slackbot/issues/99
         Updated:

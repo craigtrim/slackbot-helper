@@ -1,4 +1,5 @@
 from .bp.create_outgoing_event import CreateOutgoingEvent
+from .bp.create_image_block import CreateImageBlock
 from .bp import *
 from .svc import *
 from .dmo import *
@@ -54,6 +55,25 @@ def normalize_event(d_event: dict,
             }
     """
     return NormalizeIncomingEvent(bot_ids).process(d_event)
+
+
+def create_image_block(image_url: str,
+                       d_event_incoming: dict) -> dict:
+    """ Create an Image-only Blocks Response
+
+    Args:
+        image_url (str): a public URL for a slack image
+        d_event_incoming (dict): the incoming slack event
+            -   This is required to obtain the channel, thread timestamp (thread_ts) and input text (text)
+            -   It was thought easier to pass the original (non-normalized) Slack event as a parameter value
+                than to request these individual values
+
+    Returns:
+        dict: the outgoing slack event
+    """
+    return CreateImageBlock().process(
+        image_url=image_url,
+        d_event_incoming=d_event_incoming)
 
 
 def create_outgoing_event(output_text: str,

@@ -53,19 +53,28 @@ class MessageTextExtract(BaseObject):
                  d_event: dict) -> str or None:
 
         if 'blocks' in d_event:
+            
             message = []
             for block in d_event['blocks']:
+            
                 if 'elements' in block:
+                    
                     for element in block['elements']:
+                    
                         for inner in element['elements']:
+                    
                             if inner['type'] in ['text', 'rich_text_section']:
                                 message.append(inner['text'])
+                    
                             elif inner['type'] == 'user':
                                 message.append(f"@{inner['user_id']}")
+                    
                             elif inner['type'] == 'emoji':
                                 pass  # GRAFFL-255; can likely just ignore this
+                    
                             elif inner['type'] == 'link':
                                 pass  # GRAFFL-395; can likely just ignore this
+                    
                             else:
                                 raise NotImplementedError(inner['type'])
 

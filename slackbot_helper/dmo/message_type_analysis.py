@@ -114,6 +114,9 @@ class MessageTypeAnalysis(BaseObject):
         while '  ' in message_text:
             message_text = message_text.replace('  ', ' ').strip()
 
+        if message_text[-1] not in ['.', '!', '?']:
+            message_text = f"{message_text}."
+
         return message_text.strip()
 
     def _extract_command(self,

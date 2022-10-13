@@ -143,6 +143,9 @@ class UserIdExtract(BaseObject):
             results = [self._cleanse(x) for x in results]
             results = [x.strip() for x in results if x and len(x)]
 
+        if not results:
+            results = []
+
         if self.isEnabledForDebug:
 
             if results:

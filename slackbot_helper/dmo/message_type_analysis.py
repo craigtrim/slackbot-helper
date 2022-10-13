@@ -74,11 +74,18 @@ class MessageTypeAnalysis(BaseObject):
 
     def _analyze_type(self) -> MessageType:
 
-        bot_ids = [x for x in self._user_ids
-                   if x in self._bot_ids]
+        def get_bot_ids() -> list:
+            if not self._user_ids:
+                return self._bot_ids
+            return [x for x in self._user_ids if x in self._bot_ids]
 
-        human_ids = [x for x in self._user_ids
-                     if x not in self._bot_ids]
+        def get_human_ids() -> list:
+            if not self._user_ids:
+                return []
+            return [x for x in self._user_ids if x not in self._bot_ids]
+
+        bot_ids = get_bot_ids()
+        human_ids = get_human_ids()
 
         if len(bot_ids) == 0:
             if len(human_ids) == 1:

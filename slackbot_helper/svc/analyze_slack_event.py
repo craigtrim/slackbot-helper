@@ -87,6 +87,13 @@ class AnalyzeSlackEvent(BaseObject):
         user_ids = self._extract_user_ids(d_event)
         message_text = self._extract_message_text(d_event)
 
+        def get_target_user_id() -> str:
+            if not user_ids:
+                return user_ids[-1]
+            return user_ids[0]
+
+        target_user_id = get_target_user_id()
+
         d_message_type = MessageTypeAnalysis(
             user_ids=user_ids,
             bot_ids=self._bot_ids,
@@ -101,7 +108,7 @@ class AnalyzeSlackEvent(BaseObject):
             'meta_mode': mode_of_address,
             'meta_type': d_message_type['message_type'].name,
             'user_source': source_user_id,
-            'user_target': user_ids[0],
+            'user_target': target_user_id,
             'user_all': user_ids
         }
 

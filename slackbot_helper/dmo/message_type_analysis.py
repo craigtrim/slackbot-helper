@@ -119,6 +119,7 @@ class MessageTypeAnalysis(BaseObject):
 
         message_text = self._message_text
         for user_id in self._user_ids:
+            message_text = message_text.replace(f"<@{user_id}>", "")
             message_text = message_text.replace(f"@{user_id}", "")
 
         while '  ' in message_text:

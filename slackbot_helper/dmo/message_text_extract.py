@@ -16,6 +16,13 @@ from slackbot_helper.dto import IncomingEvent
 class MessageTextExtract(BaseObject):
     """ Extract the Message Text from an Incoming Slack Events """
 
+    __known_text_types = [
+        'mrkdwn',
+        'plain_text',
+        'rich_text_section',
+        'text'
+    ]
+
     def __init__(self) -> None:
         """ Change Log
 
@@ -37,6 +44,11 @@ class MessageTextExtract(BaseObject):
             7-Oct-2022
             craigtrim@gmail.com
             *   refactored into 'slackbot-helper'
+        Updated:
+            13-Oct-2022
+            craigtrim@gmail.com
+            *   updated algorithm
+                https://github.com/craigtrim/slackbot-helper/issues/1
         """
         BaseObject.__init__(self, __name__)
 
@@ -53,30 +65,36 @@ class MessageTextExtract(BaseObject):
                  d_event: dict) -> str or None:
 
         if 'blocks' in d_event:
-            
+
             message = []
             for block in d_event['blocks']:
-            
+
                 if 'elements' in block:
-                    
+
                     for element in block['elements']:
-                    
+
                         for inner in element['elements']:
-                    
-                            if inner['type'] in ['text', 'rich_text_section']:
+
+                            if inner['type'] in self.__known_text_types:
                                 message.append(inner['text'])
-                    
+
                             elif inner['type'] == 'user':
                                 message.append(f"@{inner['user_id']}")
-                    
+
                             elif inner['type'] == 'emoji':
                                 pass  # GRAFFL-255; can likely just ignore this
-                    
+
                             elif inner['type'] == 'link':
                                 pass  # GRAFFL-395; can likely just ignore this
-                    
+
                             else:
                                 raise NotImplementedError(inner['type'])
+
+                if 'text' in block:  # slackbot-helper/issues/1
+                    if 'text' not in block['text']:
+                        raise NotImplementedError(block['text'])
+                    if block['text']['type'] in self.__known_text_types:
+                        message.append(block['text']['text'])
 
                 elif 'accessory' in block:  # formatted blocks like with Giphy
                     message.append(block['accessory']['alt_text'])

@@ -3,9 +3,11 @@
 """ Analyze an Incoming Slack Event """
 
 
-from pprint import pformat
 from typing import Any
 from typing import Dict
+
+from pprint import pprint
+from pprint import pformat
 
 from baseblock import Stopwatch
 from baseblock import BaseObject
@@ -77,6 +79,8 @@ class AnalyzeSlackEvent(BaseObject):
 
     def _process(self,
                  d_event: IncomingEvent) -> AnalyzedEvent:
+
+        pprint (d_event)
 
         def get_source_user_id() -> str:
             if 'user' in d_event:

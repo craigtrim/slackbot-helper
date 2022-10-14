@@ -3,10 +3,11 @@
 """ Extract the User IDs from an Incoming Slack Event """
 
 
-from pprint import pformat
-
 from typing import List
 from typing import Optional
+
+from pprint import pprint
+from pprint import pformat
 
 from baseblock import Stopwatch
 from baseblock import BaseObject
@@ -32,13 +33,14 @@ class UserIdExtract(BaseObject):
             *   minor refactoring
                 https://github.com/grafflr/graffl-core/issues/246
         Updated:
-            6-Oct-2022
-            craigtrim@gmail.com
-            *   refactored into 'climate-bot'
-        Updated:
             7-Oct-2022
             craigtrim@gmail.com
             *   refactored into 'slackbot-helper'
+        Updated:
+            13-Oct-2022
+            craigtrim@gmail.com
+            *   updated algorithm
+                https://github.com/craigtrim/slackbot-helper/issues/1
         """
         BaseObject.__init__(self, __name__)
 
@@ -87,11 +89,18 @@ class UserIdExtract(BaseObject):
 
                     if 'elements' in block:
                         for element in block['elements']:
-                            for inner_element in element['elements']:
-                                if inner_element['type'] == 'user':
-                                    if inner_element['user_id'] not in user_ids:
-                                        user_ids.append(
-                                            inner_element['user_id'])
+                            for inner in element['elements']:
+                                if inner['type'] == 'user':
+                                    if inner['user_id'] not in user_ids:
+                                        user_ids.append(inner['user_id'])
+
+                    elif 'text' in block:  # slackbot-helper/issues/1
+                        if 'text' not in block['text']:
+                            log_error("Event Structure Not Recognized")
+                            raise NotImplementedError
+
+                        [user_ids.append(x) for x in self._extract_ids(
+                            block['text']['text'])]
 
                     elif 'accessory' in block:  # this happens with formatted messages, like when giphy images are returned
                         pass  # TODO: can extract, but for now will pass

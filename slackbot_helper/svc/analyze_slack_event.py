@@ -98,6 +98,11 @@ class AnalyzeSlackEvent(BaseObject):
 
         target_user_id = get_target_user_id()
 
+        pprint (user_ids)
+        pprint (self._bot_ids)
+        pprint (message_text)
+        raise ValueError
+
         d_message_type = MessageTypeAnalysis(
             user_ids=user_ids,
             bot_ids=self._bot_ids,

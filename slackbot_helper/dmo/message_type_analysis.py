@@ -93,11 +93,14 @@ class MessageTypeAnalysis(BaseObject):
             elif len(human_ids) > 1:
                 return MessageType.H2H_SINGLE
 
+        if len(bot_ids) == 2 and len(human_ids) == 0:
+            return MessageType.B2B
+
         if len(human_ids) == 0:
             if len(bot_ids) == 1:
                 return MessageType.H2B_SINGLE
-            if len(bot_ids) > 1:
-                return MessageType.H2B_MULTI_INIT
+            # if len(bot_ids) > 1:
+            #     return MessageType.H2B_MULTI_INIT
 
         if self.isEnabledForWarning:
             self.logger.warning('\n'.join([
@@ -111,8 +114,8 @@ class MessageTypeAnalysis(BaseObject):
     def _analyze_text(self,
                       message_type: MessageType) -> str:
 
-        if message_type == MessageType.H2B_MULTI_INIT:
-            return self._message_text.split(self._user_ids[-1])[-1].strip()
+        # if message_type == MessageType.H2B_MULTI_INIT:
+        #     return self._message_text.split(self._user_ids[-1])[-1].strip()
 
         message_text = self._message_text
         for user_id in self._user_ids:
@@ -120,6 +123,9 @@ class MessageTypeAnalysis(BaseObject):
 
         while '  ' in message_text:
             message_text = message_text.replace('  ', ' ').strip()
+
+        if not message_text or not len(message_text):
+            return message_text
 
         if message_text[-1] not in ['.', '!', '?']:
             message_text = f"{message_text}."

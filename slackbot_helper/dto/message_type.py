@@ -33,5 +33,8 @@ class MessageType(Enum):
     # a bot-to-human response that contains no user ids
     B2H_RESPONSE = 30
 
+    # Bot-to-Bot
+    B2B = 40
+
     # All Other Message types ...
     OTHER = 99

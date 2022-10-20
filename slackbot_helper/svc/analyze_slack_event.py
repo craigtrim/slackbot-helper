@@ -80,8 +80,6 @@ class AnalyzeSlackEvent(BaseObject):
     def _process(self,
                  d_event: IncomingEvent) -> AnalyzedEvent:
 
-        pprint (d_event)
-
         def get_source_user_id() -> str:
             if 'user' in d_event:
                 return d_event['user']
@@ -97,11 +95,6 @@ class AnalyzeSlackEvent(BaseObject):
             return user_ids[0]
 
         target_user_id = get_target_user_id()
-
-        pprint (user_ids)
-        pprint (self._bot_ids)
-        pprint (message_text)
-        raise ValueError
 
         d_message_type = MessageTypeAnalysis(
             user_ids=user_ids,

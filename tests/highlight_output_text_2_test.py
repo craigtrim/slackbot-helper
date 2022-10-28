@@ -14,7 +14,7 @@ def test_service_1():
         text_2=output_text)
 
     print(result)
-    assert result == "I understand you want to know *where the library is*."
+    assert result == "I understand you want to know *where the library is.*"
 
 
 def test_service_2():
@@ -33,7 +33,7 @@ def test_service_2():
 
 
 def main():
-    test_service_2()
+    test_service_1()
 
 
 if __name__ == "__main__":

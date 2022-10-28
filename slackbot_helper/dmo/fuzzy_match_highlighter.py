@@ -30,20 +30,25 @@ class FuzzyMatchHighlighter(BaseObject):
             score = max(list(some_d_results.keys()))
             return some_d_results[score]
 
-        i = 5
-        while i >= 3:
+        threshold = 0.80
+        while threshold >= 0.75:
 
-            results = TextUtils.most_similar_phrase(
-                tokens_1=tokens_1,
-                tokens_2=tokens_2,
-                window_size=i,
-                score_threshold=0.75,
-                debug=False)
+            i = 5
+            while i >= 3:
 
-            if results and len(results):
-                return high_score(results)
+                results = TextUtils.most_similar_phrase(
+                    tokens_1=tokens_1,
+                    tokens_2=tokens_2,
+                    window_size=i,
+                    score_threshold=threshold,
+                    debug=False)
 
-            i -= 1
+                if results and len(results):
+                    return high_score(results)
+
+                i -= 1
+
+            threshold -= 0.01
 
     @staticmethod
     def _remove_punkt(input_text: str) -> str:
@@ -80,7 +85,11 @@ class FuzzyMatchHighlighter(BaseObject):
             return None
 
         text_2_lower = text_2.lower()
-        common_phrase = self._remove_punkt(d_similar['tokens_2'])
+        # self._remove_punkt(d_similar['tokens_2'])
+        common_phrase = d_similar['tokens_2']
+        for x in [' .', ' !', ' ?', ' ,']:
+            if x in common_phrase:
+                common_phrase = common_phrase.replace(x, x.strip())
 
         if common_phrase not in text_2_lower:
             if self.isEnabledForWarning:

@@ -9,7 +9,7 @@ from baseblock import BaseObject
 
 
 class CreateImageBlock(BaseObject):
-    """ Create an Image-only Blocks Response 
+    """ Create an Image-only Blocks Response
 
     Reference:
         https://github.com/craigtrim/climate-bot/issues/6#issuecomment-1276597202

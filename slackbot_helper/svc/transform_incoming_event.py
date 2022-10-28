@@ -6,11 +6,9 @@
 
 from pprint import pformat
 
-from baseblock import BaseObject
-from baseblock import Enforcer
+from baseblock import BaseObject, Enforcer
 
-from slackbot_helper.dto import IncomingEvent
-from slackbot_helper.dto import NormalizedEvent
+from slackbot_helper.dto import IncomingEvent, NormalizedEvent
 
 
 class TransformIncomingEvent(BaseObject):

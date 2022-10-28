@@ -2,10 +2,9 @@
 # -*- coding: UTF-8 -*-
 
 
+from slackbot_helper import normalize_event
 from slackbot_helper.bp import NormalizeIncomingEvent
 from slackbot_helper.dto import SlackIds
-from slackbot_helper import normalize_event
-
 
 d_incoming = {
     "blocks": [

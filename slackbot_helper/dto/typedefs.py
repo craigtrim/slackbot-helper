@@ -4,10 +4,7 @@
 
 
 from ast import Str
-from typing import List
-from typing import TypedDict
-from typing import NewType
-
+from typing import List, NewType, TypedDict
 
 SlackIds = NewType("SlackIds", List[str])
 

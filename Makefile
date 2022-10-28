@@ -15,24 +15,27 @@ copy_setup:
 
 # ----------------------------------------------------------------
 
+activate:
+	@echo Activating Microservice
+	poetry run pre-commit autoupdate
+
 install:
+	@echo Installing Microservice
 	poetry check
 	poetry lock
 	poetry update
 	poetry install
+	poetry run pre-commit install
 
 test:
 	poetry run pytest --disable-pytest-warnings
 
 build:
+	@echo Building Microservice
 	make install
 	make test
 	poetry build
 	make copy_setup
-
-mypy:
-	poetry run mypy slackbot_helper
-	poetry run stubgen .\slackbot_helper\ -o .
 
 linters:
 	poetry run pre-commit run --all-files
@@ -48,8 +51,6 @@ freeze:
 
 all:
 	make build
-# 	20221007; mypy is incredibly brutal ...
-#	make mypy
-#	make linters
+	make linters
 	make pyc
 	make freeze

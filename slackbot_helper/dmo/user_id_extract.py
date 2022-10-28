@@ -3,17 +3,12 @@
 """ Extract the User IDs from an Incoming Slack Event """
 
 
-from typing import List
-from typing import Optional
+from pprint import pformat, pprint
+from typing import List, Optional
 
-from pprint import pprint
-from pprint import pformat
+from baseblock import BaseObject, Stopwatch
 
-from baseblock import Stopwatch
-from baseblock import BaseObject
-
-from slackbot_helper.dto import SlackIds
-from slackbot_helper.dto import IncomingEvent
+from slackbot_helper.dto import IncomingEvent, SlackIds
 
 
 class UserIdExtract(BaseObject):

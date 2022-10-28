@@ -7,7 +7,7 @@ from baseblock import BaseObject
 
 
 class CreateImageAndChapterBlock(BaseObject):
-    """ Create a Slack Block for display in Slack 
+    """ Create a Slack Block for display in Slack
 
     View Sample Output:
         https://github.com/craigtrim/climate-bot/issues/8#issue-1406861717

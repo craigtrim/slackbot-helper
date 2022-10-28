@@ -55,7 +55,7 @@ class CreateOutgoingEvent(BaseObject):
 
         if not output_text or not len(output_text):
             return None
-        
+
         if not d_event_incoming or type(d_event_incoming) != dict:
             return None
 

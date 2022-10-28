@@ -3,9 +3,7 @@
 """ Highlight the Portion of the Output Text that corresponds to the User Input Text """
 
 
-from baseblock import TextUtils
-from baseblock import BaseObject
-
+from baseblock import BaseObject, TextUtils
 from fast_sentence_tokenize import tokenize_text
 
 

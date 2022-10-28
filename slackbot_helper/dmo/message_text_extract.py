@@ -3,12 +3,10 @@
 """ Extract the Message Text from an Incoming Slack Events """
 
 
-from typing import List
-from typing import Optional
 from pprint import pformat
+from typing import List, Optional
 
-from baseblock import Stopwatch
-from baseblock import BaseObject
+from baseblock import BaseObject, Stopwatch
 
 from slackbot_helper.dto import IncomingEvent
 

@@ -6,7 +6,6 @@ from pprint import pprint
 
 from slackbot_helper.dmo import UserIdExtract
 
-
 d_event_incoming = {
     "blocks": [
         {

@@ -3,9 +3,8 @@
 """ Create a Button that links to an Image """
 
 
-from typing import Optional
-
 from pprint import pformat
+from typing import Optional
 
 from baseblock import BaseObject
 

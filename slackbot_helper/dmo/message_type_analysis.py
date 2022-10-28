@@ -3,15 +3,11 @@
 """ Analyze the Message Text into Structured Outcomes """
 
 
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from baseblock import EnvIO
-from baseblock import Stopwatch
-from baseblock import BaseObject
+from baseblock import BaseObject, EnvIO, Stopwatch
 
-from slackbot_helper.dto import SlackIds
-from slackbot_helper.dto import MessageType
+from slackbot_helper.dto import MessageType, SlackIds
 
 
 class MessageTypeAnalysis(BaseObject):

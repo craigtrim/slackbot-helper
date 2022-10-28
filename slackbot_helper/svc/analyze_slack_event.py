@@ -3,22 +3,15 @@
 """ Analyze an Incoming Slack Event """
 
 
-from typing import Any
-from typing import Dict
+from pprint import pformat, pprint
+from typing import Any, Dict
 
-from pprint import pprint
-from pprint import pformat
+from baseblock import BaseObject, Stopwatch
 
-from baseblock import Stopwatch
-from baseblock import BaseObject
-
-from slackbot_helper.dmo import UserIdExtract
-from slackbot_helper.dmo import MessageTextExtract
-from slackbot_helper.dmo import MessageTypeAnalysis
-from slackbot_helper.dto import SlackIds
-from slackbot_helper.dto import MessageType
-from slackbot_helper.dto import IncomingEvent
-from slackbot_helper.dto import AnalyzedEvent
+from slackbot_helper.dmo import (MessageTextExtract, MessageTypeAnalysis,
+                                 UserIdExtract)
+from slackbot_helper.dto import (AnalyzedEvent, IncomingEvent, MessageType,
+                                 SlackIds)
 
 
 class AnalyzeSlackEvent(BaseObject):

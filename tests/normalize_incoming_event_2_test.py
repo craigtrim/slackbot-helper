@@ -4,8 +4,8 @@
 
 from logging.handlers import DEFAULT_TCP_LOGGING_PORT
 from pprint import pprint
-from slackbot_helper import normalize_event
 
+from slackbot_helper import normalize_event
 
 d_event_incoming = {
     "blocks": [

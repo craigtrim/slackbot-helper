@@ -1,12 +1,11 @@
-from .bp.create_outgoing_event import CreateOutgoingEvent
+from .bp import *
 from .bp.create_image_block import CreateImageBlock
 from .bp.create_image_button import CreateImageButton
-from .bp import *
-from .svc import *
+from .bp.create_outgoing_event import CreateOutgoingEvent
+from .bp.normalize_incoming_event import NormalizeIncomingEvent
 from .dmo import *
 from .dto import *
-
-from .bp.normalize_incoming_event import NormalizeIncomingEvent
+from .svc import *
 
 
 def normalize_event(d_event: dict,

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from .bp import *
 from .bp.create_image_block import CreateImageBlock
 from .bp.create_image_button import CreateImageButton
@@ -6,6 +8,24 @@ from .bp.normalize_incoming_event import NormalizeIncomingEvent
 from .dmo import *
 from .dto import *
 from .svc import *
+from .svc.highlight_output_text import HighlightOutputText
+
+
+def highlight_text(text_1: str,
+                   text_2: str) -> Optional[str]:
+    """ Entry Point
+
+    Args:
+        text_1 (str): the baseline text string
+        text_2 (str): the text string to modify (highlight)
+
+    Returns:
+        Optional[str]: a highlighted string (if any)
+    """
+    return HighlightOutputText().process(
+        text_1=text_1,
+        text_2=text_2,
+        enable_fuzzy_matching=True)
 
 
 def normalize_event(d_event: dict,

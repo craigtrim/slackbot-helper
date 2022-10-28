@@ -3,8 +3,12 @@
 """ Highlight the Portion of the Output Text that corresponds to the User Input Text """
 
 
+from typing import Optional
+
 from baseblock import BaseObject, TextUtils
 from fast_sentence_tokenize import tokenize_text
+
+from slackbot_helper.dmo import ExactMatchHighlighter, FuzzyMatchHighlighter
 
 
 class HighlightOutputText(BaseObject):
@@ -23,46 +27,42 @@ class HighlightOutputText(BaseObject):
             *   ported from owl-parser in pursuit of
                 https://github.com/craigtrim/climate-bot/issues/8
         Updated:
-            29-Oct-2022
+            19-Oct-2022
             craigtrim@gmail.com
             *   ported from 'climate-bot' and renamed from 'output-text-highlighter'
+        Updated:
+            28-Oct-2022
+            craigtrim@gmail.com
+            *   refactor logic into domain components
         """
         BaseObject.__init__(self, __name__)
+        self._exact_matching = ExactMatchHighlighter().process
+        self._fuzzy_matching = FuzzyMatchHighlighter().process
 
     def process(self,
                 text_1: str,
-                text_2: str) -> str:
+                text_2: str,
+                enable_fuzzy_matching: bool = True) -> Optional[str]:
+        """ Entry Point
 
-        tokens_1 = tokenize_text(text_1.lower())
-        tokens_2 = tokenize_text(text_2.lower())
+        Args:
+            text_1 (str): the baseline text string
+            text_2 (str): the text string to modify (highlight)
+            enable_fuzzy_matching (bool, optional): Enable Fuzzy Highlighting. Defaults to True.
 
-        common_tokens = TextUtils.longest_common_phrase(
-            tokens_1=tokens_1,
-            tokens_2=tokens_2)
+        Returns:
+            Optional[str]: a highlighted string (if any)
+        """
 
-        if not common_tokens:
-            return text_2
+        result = self._exact_matching(text_1, text_2)
+        if result != text_1:
+            return result
 
-        common_phrase = ' '.join(common_tokens).strip().lower()
-        text_2_lower = text_2.lower()
+        if not enable_fuzzy_matching:
+            return None
 
-        if common_phrase not in text_2_lower:
-            if self.isEnabledForWarning:
-                self.logger.warning('\n'.join([
-                    f"Common Phrase Not Found in Text 2",
-                    f"\tCommon Phrase: {common_phrase}",
-                    f"\tText 2: {text_2_lower}"]))
-            return text_2_lower
+        result = self._fuzzy_matching(text_1, text_2)
+        if result != text_1:
+            return result
 
-        x = text_2_lower.index(common_phrase)
-        y = x + len(common_phrase)
-
-        start = text_2[:x]
-        mid = f"*{text_2[x:y]}*"
-        end = text_2[y:]
-
-        final = f"{start} {mid} {end}"
-        while '  ' in final:
-            final = final.replace('  ', ' ').strip()
-
-        return final
+        return None

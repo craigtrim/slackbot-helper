@@ -22,62 +22,6 @@ class FuzzyMatchHighlighter(BaseObject):
         """
         BaseObject.__init__(self, __name__)
 
-    @staticmethod
-    # TODO: baseblock >= 0.1.34
-    def most_similar_phrase(tokens_1: List[str],
-                            tokens_2: List[str],
-                            window_size: int,
-                            score_threshold: float,
-                            debug: bool = False) -> dict:
-        """ Find the Most Similar Phrase in Tokens-2 relative to Tokens-1
-
-        Implementation Note:
-            How is this different from 'longest-common-phrase'?
-
-            In the example below, there are no common sequences between tokens-1 and tokens-2
-            This function will find "nearly similar" sequences and return the most similar
-
-        Args:
-            tokens_1 (list): the first tokenized list
-                ['where', 'is', 'the', 'library', '?']
-            tokens_2 (list): the second tokenized list
-                ['I', 'understand', 'you', 'want', 'to', 'know', 'where', 'the', 'library', 'is', '.']
-            window_size (int, Optional): n-Gram window size for comparison.
-            score_threshold (float): when threshold is met, return the results (if any)
-            debug (bool, Optional): When True, print results to console. default is False.
-
-        Returns:
-            the most similar span (list) with similarity score
-        """
-
-        tokens_1 = [x.lower().strip() for x in tokens_1]
-        tokens_2 = [x.lower().strip() for x in tokens_2]
-
-        t1 = TextUtils.sliding_window(
-            tokens_1,
-            window_size=window_size)
-
-        t2 = TextUtils.sliding_window(
-            tokens_2,
-            window_size=window_size)
-
-        d_results = {}
-
-        for item_1 in [' '.join(x) for x in t1]:
-            for item_2 in [' '.join(x) for x in t2]:
-
-                if item_1 == item_2:
-                    return {100: {"tokens_1": item_1, "tokens_2": item_2}}
-
-                score = TextUtils.jaccard_similarity(item_1, item_2)
-                if debug:
-                    print(f"({item_1}) vs. ({item_2}) = {score}")
-
-                if score >= score_threshold:
-                    d_results[score] = {"tokens_1": item_1, "tokens_2": item_2}
-
-        return d_results
-
     def _most_similar_phrase(self,
                              tokens_1: List[str],
                              tokens_2: List[str]) -> Optional[dict]:
@@ -89,7 +33,7 @@ class FuzzyMatchHighlighter(BaseObject):
         i = 5
         while i >= 3:
 
-            results = FuzzyMatchHighlighter.most_similar_phrase(
+            results = TextUtils.most_similar_phrase(
                 tokens_1=tokens_1,
                 tokens_2=tokens_2,
                 window_size=i,
@@ -100,6 +44,18 @@ class FuzzyMatchHighlighter(BaseObject):
                 return high_score(results)
 
             i -= 1
+
+    @staticmethod
+    def _remove_punkt(input_text: str) -> str:
+
+        def is_valid(token: str) -> bool:
+            if len(token) == 1 and not token.isalpha():
+                return False
+            return True
+
+        tokens = [x for x in input_text.split() if x and is_valid(x)]
+
+        return ' '.join(tokens).strip()
 
     def process(self,
                 tokens_1: List[str],
@@ -123,8 +79,8 @@ class FuzzyMatchHighlighter(BaseObject):
         if not d_similar or not len(d_similar):
             return None
 
-        common_phrase = ' '.join(d_similar['tokens_2']).strip().lower()
         text_2_lower = text_2.lower()
+        common_phrase = self._remove_punkt(d_similar['tokens_2'])
 
         if common_phrase not in text_2_lower:
             if self.isEnabledForWarning:
@@ -144,5 +100,11 @@ class FuzzyMatchHighlighter(BaseObject):
         final = f"{start} {mid} {end}"
         while '  ' in final:
             final = final.replace('  ', ' ').strip()
+
+        # remove improperly formatted punctuation
+        # e.g., 'the end .' => 'the end.'
+        for x in [' .', ' !', ' ?']:
+            if x in final:
+                final = final.replace(x, x.strip())
 
         return final

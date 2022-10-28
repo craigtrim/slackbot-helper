@@ -60,7 +60,8 @@ class HighlightOutputText(BaseObject):
         result = self._exact_matching(tokens_1=tokens_1,
                                       tokens_2=tokens_2,
                                       text_2=text_2)
-        if result != text_1:
+
+        if result and result != text_1:
             return result
 
         if not enable_fuzzy_matching:

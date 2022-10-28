@@ -3,7 +3,7 @@ aiosignal @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/4c/98/
 async-timeout @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/31/90/f6/e2df01736b095fcbabf93cf579a4d9b8d7a4a78c4c63fad4d32320b197/async_timeout-4.0.2-py3-none-any.whl
 attrs @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/bf/fd/53/6927ac12e590ef2986b1e51f62c58cda747852babd092046f73aadc943/attrs-22.1.0-py2.py3-none-any.whl
 autopep8 @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/99/fa/8e/112982d07bedbc9f4184629dd998ac5b3cb0a01cdee98ded03128c72bc/autopep8-1.6.0-py2.py3-none-any.whl
-baseblock @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/76/31/98/a31db9974e65762b26cb2e4d2d1f2445550b2337106c8c90e3d667ca13/baseblock-0.1.33-py3-none-any.whl
+baseblock @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/16/42/11/daf72842a01e2542ef5b2b1f2e70e2210fa2e525433b788e9af00377ee/baseblock-0.1.34-py3-none-any.whl
 blis @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/9e/fb/db/dcd527c94406d1a4462ede029d260b2e46fa98bf0ad18e643aaae67444/blis-0.7.9-cp38-cp38-win_amd64.whl
 catalogue @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/b1/02/9e/79deabfc053e07122eb1e335f309bbfcffe0ab73f5dd334016eac62505/catalogue-2.0.8-py3-none-any.whl
 certifi @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/4c/ca/11/a4b6ad6425a544a21c80fe68e16e3831d3d482b50ca9576c2a952f8b1f/certifi-2022.9.24-py3-none-any.whl
@@ -56,7 +56,7 @@ regex @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/fe/3c/1c/7
 requests @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/73/b6/11/8a5136f9e1ac320567e50227250ded8bfa8942970419dd6c48eea64899/requests-2.28.1-py3-none-any.whl
 slack-bolt @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/b8/c8/09/8441c8d59ef6e3873a83520ec3f8cca1d58cdeb555c61835dc78713f2e/slack_bolt-1.15.2-py2.py3-none-any.whl
 slack-sdk @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/37/26/b5/60c32a7e6b87123d69b41106b2abceedf29c7d2dc9fdf6e2e0e85ba2af/slack_sdk-3.19.2-py2.py3-none-any.whl
-slackbot-helper==0.1.10
+slackbot-helper==0.1.11
 slackclient @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/1e/a2/c7/e480a2c98a94c5403f2d1725978b7b86c0940f4686c466e2c36d93f625/slackclient-2.9.4-py2.py3-none-any.whl
 smart-open @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/26/81/76/40a70723fc34dccdf893387d11e40c3dd3a59c46fb6b461944136fbe4b/smart_open-5.2.1-py3-none-any.whl
 spacy @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/71/5e/7a/797fb6afc20f61dd0cfc466758da813cc4639f874d39feba919899d8c2/spacy-3.3.0-cp38-cp38-win_amd64.whl

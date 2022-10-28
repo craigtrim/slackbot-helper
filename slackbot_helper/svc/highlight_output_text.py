@@ -54,14 +54,21 @@ class HighlightOutputText(BaseObject):
             Optional[str]: a highlighted string (if any)
         """
 
-        result = self._exact_matching(text_1, text_2)
+        tokens_1 = tokenize_text(text_1.lower())
+        tokens_2 = tokenize_text(text_2.lower())
+
+        result = self._exact_matching(tokens_1=tokens_1,
+                                      tokens_2=tokens_2,
+                                      text_2=text_2)
         if result != text_1:
             return result
 
         if not enable_fuzzy_matching:
             return None
 
-        result = self._fuzzy_matching(text_1, text_2)
+        result = self._fuzzy_matching(tokens_1=tokens_1,
+                                      tokens_2=tokens_2,
+                                      text_2=text_2)
         if result != text_1:
             return result
 

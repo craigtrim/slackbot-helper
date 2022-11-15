@@ -1,1 +1,1 @@
-from .normalize_incoming_event import NormalizedEvent
+from .normalize_incoming_event import NormalizeIncomingEvent

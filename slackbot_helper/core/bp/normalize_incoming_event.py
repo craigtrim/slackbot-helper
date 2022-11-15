@@ -5,7 +5,7 @@
 
 from uuid import uuid1
 
-from baseblock import BaseObject, EnvIO
+from baseblock import BaseObject
 
 from slackbot_helper.core.dto import IncomingEvent, NormalizedEvent, SlackIds
 from slackbot_helper.core.svc import AnalyzeSlackEvent, TransformIncomingEvent

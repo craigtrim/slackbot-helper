@@ -8,7 +8,8 @@ from typing import Optional
 from baseblock import BaseObject, TextUtils
 from fast_sentence_tokenize import tokenize_text
 
-from slackbot_helper.dmo import ExactMatchHighlighter, FuzzyMatchHighlighter
+from slackbot_helper.core.dmo import (ExactMatchHighlighter,
+                                      FuzzyMatchHighlighter)
 
 
 class HighlightOutputText(BaseObject):

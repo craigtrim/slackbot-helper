@@ -8,7 +8,7 @@ from typing import List, Optional
 
 from baseblock import BaseObject, Stopwatch
 
-from slackbot_helper.dto import IncomingEvent, SlackIds
+from slackbot_helper.core.dto import IncomingEvent, SlackIds
 
 
 class UserIdExtract(BaseObject):

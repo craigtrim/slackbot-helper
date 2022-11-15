@@ -3,10 +3,10 @@ from setuptools import setup
 
 packages = \
 ['slackbot_helper',
- 'slackbot_helper.bp',
- 'slackbot_helper.dmo',
- 'slackbot_helper.dto',
- 'slackbot_helper.svc']
+ 'slackbot_helper.core.bp',
+ 'slackbot_helper.core.dmo',
+ 'slackbot_helper.core.dto',
+ 'slackbot_helper.core.svc']
 
 package_data = \
 {'': ['*']}

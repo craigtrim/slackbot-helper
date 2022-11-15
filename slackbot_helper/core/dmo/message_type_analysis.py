@@ -7,7 +7,7 @@ from typing import List, Optional
 
 from baseblock import BaseObject, EnvIO, Stopwatch
 
-from slackbot_helper.dto import MessageType, SlackIds
+from slackbot_helper.core.dto import MessageType, SlackIds
 
 
 class MessageTypeAnalysis(BaseObject):

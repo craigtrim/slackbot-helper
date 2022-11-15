@@ -4,7 +4,7 @@
 
 from pprint import pprint
 
-from slackbot_helper.dmo import MessageTypeAnalysis
+from slackbot_helper.core.dmo import MessageTypeAnalysis
 
 
 def test_component():

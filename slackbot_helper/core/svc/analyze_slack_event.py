@@ -8,10 +8,10 @@ from typing import Any, Dict
 
 from baseblock import BaseObject, Stopwatch
 
-from slackbot_helper.dmo import (MessageTextExtract, MessageTypeAnalysis,
-                                 UserIdExtract)
-from slackbot_helper.dto import (AnalyzedEvent, IncomingEvent, MessageType,
-                                 SlackIds)
+from slackbot_helper.core.dmo import (MessageTextExtract, MessageTypeAnalysis,
+                                      UserIdExtract)
+from slackbot_helper.core.dto import (AnalyzedEvent, IncomingEvent,
+                                      MessageType, SlackIds)
 
 
 class AnalyzeSlackEvent(BaseObject):

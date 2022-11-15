@@ -8,7 +8,7 @@ from pprint import pformat
 
 from baseblock import BaseObject, Enforcer
 
-from slackbot_helper.dto import IncomingEvent, NormalizedEvent
+from slackbot_helper.core.dto import IncomingEvent, NormalizedEvent
 
 
 class TransformIncomingEvent(BaseObject):

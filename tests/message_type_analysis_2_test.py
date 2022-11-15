@@ -4,8 +4,8 @@
 
 from pprint import pprint
 
-from slackbot_helper.dmo import MessageTypeAnalysis
-from slackbot_helper.dto import MessageType
+from slackbot_helper.core.dmo import MessageTypeAnalysis
+from slackbot_helper.core.dto import MessageType
 
 # FOR REFERENCE ONLY ... not used in test
 d_event_incoming = {

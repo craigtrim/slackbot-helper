@@ -1,4 +1,4 @@
-from slackbot_helper.svc import HighlightOutputText
+from slackbot_helper.core.svc import HighlightOutputText
 
 
 def test_service_1():

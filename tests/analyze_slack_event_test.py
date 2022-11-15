@@ -4,7 +4,7 @@
 
 from pprint import pprint
 
-from slackbot_helper.svc import AnalyzeSlackEvent
+from slackbot_helper.core.svc import AnalyzeSlackEvent
 
 d_event_incoming = {
     "blocks": [

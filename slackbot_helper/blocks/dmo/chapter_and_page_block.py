@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-""" Create a Slack Block for display in Slack """
+""" Display Book Results with both a Chapter and Page in Slack """
 
+
+from typing import List, Optional
 
 from baseblock import BaseObject
 
 
-class CreateImageAndChapterBlock(BaseObject):
-    """ Create a Slack Block for display in Slack
+class ChapterAndPageBlock(BaseObject):
+    """ Display Book Results with both a Chapter and Page in Slack
 
     View Sample Output:
         https://github.com/craigtrim/climate-bot/issues/8#issue-1406861717
@@ -25,6 +27,11 @@ class CreateImageAndChapterBlock(BaseObject):
             20-Oct-2022
             craigtrim@gmail.com
             *   refactored out of 'climate-bot'
+        Created:
+            15-Nov-2022
+            craigtrim@gmail.com
+            *   further refactoring in pursuit of
+                https://github.com/craigtrim/slackbot-helper/issues/2
 
         Args:
             web_client (WebClient): an instantiation of the slack client
@@ -32,12 +39,12 @@ class CreateImageAndChapterBlock(BaseObject):
         BaseObject.__init__(self, __name__)
 
     def _book_name_text(self,
-                        chapter: int,
+                        chapter_number: int,
                         book_name: str) -> str:
         """ Format the Provenance Description
 
         Args:
-            chapter (int): the chapter number
+            chapter_number (int): the chapter number
             book_name (str): the name of the book (label form)
 
         Returns:
@@ -48,16 +55,16 @@ class CreateImageAndChapterBlock(BaseObject):
 
         # don't want text that says "Chapter 0"
         # the '0' chapter is always the book's Introduction
-        if chapter == 0:
+        if chapter_number == 0:
             return ':book: *#BOOKNAME* Introduction:'.replace(
                 "#BOOKNAME", book_name)
 
         # Use chapter numbers as usual
         return ':book: *#BOOKNAME* Chapter #CHAPTER:'.replace(
-            "#BOOKNAME", book_name).replace('#CHAPTER', str(chapter))
+            "#BOOKNAME", book_name).replace('#CHAPTER', str(chapter_number))
 
     @staticmethod
-    def _primary_text_only(output_text: str,
+    def _primary_text_only(primary_text: str,
                            book_name_text: str,
                            page_url: str,
                            chapter_url: str) -> list:
@@ -66,7 +73,7 @@ class CreateImageAndChapterBlock(BaseObject):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": output_text
+                    "text": primary_text
                 }
             },
             {
@@ -103,8 +110,8 @@ class CreateImageAndChapterBlock(BaseObject):
         ]
 
     @staticmethod
-    def _secondary_text(output_text: str,
-                        output_text_secondary: list,
+    def _secondary_text(primary_text: str,
+                        secondary_text: List[str],
                         page_url: str,
                         chapter_url: str,
                         book_name_text: str) -> str:
@@ -113,14 +120,14 @@ class CreateImageAndChapterBlock(BaseObject):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": output_text
+                    "text": primary_text
                 }
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": output_text_secondary
+                    "text": secondary_text
                 }
             },
             {
@@ -157,57 +164,55 @@ class CreateImageAndChapterBlock(BaseObject):
         ]
 
     def process(self,
-                d_event_incoming: dict,
-                output_text: str,
-                output_text_secondary: list,
+                primary_text: str,
+                secondary_text: Optional[List[str]],
                 page_url: str,
-                chapter: int,
                 chapter_url: str,
-                book_name: str) -> dict:
+                chapter_number: int,
+                book_name: str,
+                slack_channel_id: str,
+                slack_thread_ts: Optional[str] = None) -> dict:
         """ Entry Point
 
         Args:
-            d_event_incoming (dict): the incoming event
-            output_text (str): the primary output text to display to the user
-            output_text_secondary (list): the secondary output text for the user
+            primary_text (str): the primary output text to display to the user
+            secondary_text (Optional[List[str]]): the secondary output text for the user
             page_url (str): the S3 Page URL
-            chapter (int): the chapter number
             chapter_url (str): the S3 Chapter URL
+            chapter_number (int): the chapter number
             book_name (str): the name of the book (label form)
+            slack_channel_id (str): the Slack Channel ID
+            slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
 
         Returns:
             dict: the display block
         """
 
         book_name_text = self._book_name_text(
-            chapter=chapter,
-            book_name=book_name)
-
-        def get_thread_ts() -> str or None:
-            if 'thread_ts' in d_event_incoming:
-                return d_event_incoming['thread_ts']
+            book_name=book_name,
+            chapter_number=chapter_number)
 
         def decide() -> list:
-            if output_text_secondary and len(output_text_secondary):
+            if secondary_text and len(secondary_text):
                 return self._secondary_text(
                     page_url=page_url,
                     chapter_url=chapter_url,
                     book_name_text=book_name_text,
-                    output_text=output_text,
-                    output_text_secondary=output_text_secondary)
+                    output_text=primary_text,
+                    output_text_secondary=secondary_text)
 
             return self._primary_text_only(
                 page_url=page_url,
                 chapter_url=chapter_url,
-                output_text=output_text,
+                output_text=primary_text,
                 book_name_text=book_name_text)
 
         blocks = decide()
 
         d_event_outgoing = {
-            'channel': d_event_incoming['channel'],
             'blocks': blocks,
-            'thread_ts': get_thread_ts(),
+            'channel': slack_channel_id,
+            'thread_ts': slack_thread_ts,
         }
 
         return d_event_outgoing

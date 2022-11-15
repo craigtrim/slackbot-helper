@@ -4,11 +4,12 @@
 
 
 from pprint import pformat
+from typing import Optional
 
 from baseblock import BaseObject
 
 
-class CreateOutgoingEvent(BaseObject):
+class StandardTextBlock(BaseObject):
     """ Format a Response into a "Slack Blocks" object """
 
     def __init__(self):
@@ -37,74 +38,78 @@ class CreateOutgoingEvent(BaseObject):
             7-Oct-2022
             craigtrim@gmail.com
             *   refactored out of slackbot and renamed from 'format-slack-response'
+        Updated:
+            15-Nov-2022
+            craigtrim@gmail.com
+            *   renamed from 'create-outgoing-event' in pursuit of
+                https://github.com/craigtrim/slackbot-helper/issues/2
         """
         BaseObject.__init__(self, __name__)
 
+    def _no_links(self,
+                  output_text: str) -> list:
+        return [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",  # 20220914; use 'mrkdwn' to properly format <@UserId> statements
+                    "text": output_text
+                }
+            }
+        ]
+
+    def _links(self,
+               output_text: str) -> list:
+
+        tokens = output_text.split('https:')
+        url = f"https:{tokens[1].strip().replace(' ', '')}"
+
+        text = tokens[0].strip()
+        if not len(text):
+            text = ' '  # COR-99; can't have blank text
+
+        return [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": text
+                },
+                "accessory": {
+                    "type": "image",
+                    "image_url": url,
+                    "alt_text": None
+                }
+            }
+        ]
+
     def process(self,
-                d_event_incoming: dict,
-                output_text: str) -> dict:
-        """ Create and Format Outgoing Slack Events
+                output_text: str,
+                slack_channel_id: str,
+                slack_thread_ts: Optional[str] = None) -> dict:
+        """ Entry Point
 
         Args:
-            d_event_incoming (dict): the incoming slack event
             output_text (str): the outgoing slack message
+            slack_channel_id (str): the Slack Channel ID
+            slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
 
         Returns:
-            dict: the outgoing slack event
+            dict: the display block
         """
 
         if not output_text or not len(output_text):
             return None
 
-        if not d_event_incoming or type(d_event_incoming) != dict:
-            return None
-
-        def get_channel() -> str:
-            return d_event_incoming['channel']
-
         def get_blocks() -> list:
-
             if 'https:' not in output_text:
-                return [
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",  # 20220914; use 'mrkdwn' to properly format <@UserId> statements
-                            "text": output_text
-                        }
-                    }
-                ]
-
-            tokens = output_text.split('https:')
-            url = f"https:{tokens[1].strip().replace(' ', '')}"
-
-            text = tokens[0].strip()
-            if not len(text):
-                text = ' '  # COR-99; can't have blank text
-
-            return [
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": text
-                    },
-                    "accessory": {
-                        "type": "image",
-                        "image_url": url,
-                        "alt_text": d_event_incoming['text']
-                    }
-                }
-            ]
-
-        def get_thread_ts() -> str or None:
-            if 'thread_ts' in d_event_incoming:
-                return d_event_incoming['thread_ts']
+                return self._no_links(output_text)
+            return self._links(output_text)
 
         d_event_outgoing = {
-            'channel': get_channel(),
             'blocks': get_blocks(),
-            'thread_ts': get_thread_ts(),
+            'channel': slack_channel_id,
+            'thread_ts': slack_thread_ts
         }
 
         if self.isEnabledForDebug:

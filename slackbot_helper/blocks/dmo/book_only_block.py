@@ -160,14 +160,14 @@ class BookOnlyBlock(BaseObject):
                     book_url=book_url,
                     book_name=book_name,
                     book_button_text=book_button_text,
-                    output_text=primary_text,
-                    output_text_secondary=secondary_text)
+                    primary_text=primary_text,
+                    secondary_text=secondary_text)
 
             return self._primary_text_only(
                 book_url=book_url,
                 book_name=book_name,
                 book_button_text=book_button_text,
-                output_text=primary_text)
+                primary_text=primary_text)
 
         blocks = decide()
 

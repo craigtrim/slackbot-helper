@@ -26,7 +26,7 @@ class ResultBlock(BaseObject):
         BaseObject.__init__(self, __name__)
         self._book_only = BookOnlyBlock().process
         self._chapter_and_page_block = ChapterAndPageBlock().process
-        self._standard_text_block = StandardTextBlock()
+        self._standard_text_block = StandardTextBlock().process
 
     def text_block(self,
                    output_text: str,

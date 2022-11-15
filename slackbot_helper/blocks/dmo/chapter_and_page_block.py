@@ -198,13 +198,13 @@ class ChapterAndPageBlock(BaseObject):
                     page_url=page_url,
                     chapter_url=chapter_url,
                     book_name_text=book_name_text,
-                    output_text=primary_text,
-                    output_text_secondary=secondary_text)
+                    primary_text=primary_text,
+                    secondary_text=secondary_text)
 
             return self._primary_text_only(
                 page_url=page_url,
                 chapter_url=chapter_url,
-                output_text=primary_text,
+                primary_text=primary_text,
                 book_name_text=book_name_text)
 
         blocks = decide()

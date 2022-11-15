@@ -3,9 +3,14 @@
 """ Display Book Results with both a Chapter and Page in Slack """
 
 
-from typing import List, Optional
+from typing import List
+from typing import Optional
+
+from random import sample
 
 from baseblock import BaseObject
+
+from slackbot_helper.blocks.dto import book_emojis
 
 
 class ChapterAndPageBlock(BaseObject):
@@ -15,7 +20,8 @@ class ChapterAndPageBlock(BaseObject):
         https://github.com/craigtrim/climate-bot/issues/8#issue-1406861717
     """
 
-    def __init__(self):
+    def __init__(self,
+                 emojis: Optional[List[str]] = None):
         """ Change Log
 
         Created:
@@ -34,9 +40,11 @@ class ChapterAndPageBlock(BaseObject):
                 https://github.com/craigtrim/slackbot-helper/issues/2
 
         Args:
-            web_client (WebClient): an instantiation of the slack client
+            emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
+                if left empty, will sample from 'book' themed slack emojis
         """
         BaseObject.__init__(self, __name__)
+        self._emojis = emojis
 
     def _book_name_text(self,
                         chapter_number: int,
@@ -52,6 +60,10 @@ class ChapterAndPageBlock(BaseObject):
             Sample Output:
                 :book: How to Avoid a Climate Disaster Chapter 3:
         """
+        def emoji() -> str:
+            if self._emojis and len(self._emojis):
+                return sample(self._emojis, 1)[0]
+            return sample(book_emojis, 1)[0]
 
         # don't want text that says "Chapter 0"
         # the '0' chapter is always the book's Introduction
@@ -59,9 +71,12 @@ class ChapterAndPageBlock(BaseObject):
             return ':book: *#BOOKNAME* Introduction:'.replace(
                 "#BOOKNAME", book_name)
 
-        # Use chapter numbers as usual
-        return ':book: *#BOOKNAME* Chapter #CHAPTER:'.replace(
-            "#BOOKNAME", book_name).replace('#CHAPTER', str(chapter_number))
+        book_text = ':#EMOJI: *#BOOKNAME* Chapter #CHAPTER:'
+        book_text = book_text.replace('#EMOJI', emoji())
+        book_text = book_text.replace("#BOOKNAME", book_name)
+        book_text = book_text.replace('#CHAPTER', str(chapter_number))
+
+        return book_text
 
     @staticmethod
     def _primary_text_only(primary_text: str,

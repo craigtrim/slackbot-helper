@@ -12,10 +12,13 @@ repos:
   #   rev: 3.9.2
   #   hooks:
   #     - id: flake8
-  - repo: https://github.com/timothycrosley/isort
-    rev: 5.10.1
-    hooks:
-      - id: isort
+
+  # 20221115; I can do a better job manually
+  # repo: https://github.com/timothycrosley/isort
+  #   rev: 5.10.1
+  #   hooks:
+  #     - id: isort
+
   - repo: https://github.com/kynan/nbstripout
     rev: 0.6.1
     hooks:

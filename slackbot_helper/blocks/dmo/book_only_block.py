@@ -3,9 +3,14 @@
 """ Display Book Results with a Book Name and Book URL only """
 
 
-from typing import List, Optional
+from random import sample
+
+from typing import List
+from typing import Optional
 
 from baseblock import BaseObject
+
+from slackbot_helper.blocks.dto import book_emojis
 
 
 class BookOnlyBlock(BaseObject):
@@ -17,7 +22,8 @@ class BookOnlyBlock(BaseObject):
         ???
     """
 
-    def __init__(self):
+    def __init__(self,
+                 emojis: Optional[List[str]] = None):
         """ Change Log
 
         Created:
@@ -27,9 +33,11 @@ class BookOnlyBlock(BaseObject):
                 https://github.com/craigtrim/slackbot-helper/issues/2
 
         Args:
-            web_client (WebClient): an instantiation of the slack client
+            emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
+                if left empty, will sample from 'book' themed slack emojis
         """
         BaseObject.__init__(self, __name__)
+        self._emojis = emojis
 
     def _book_name_text(self,
                         book_name: str) -> str:
@@ -43,7 +51,16 @@ class BookOnlyBlock(BaseObject):
             Sample Output:
                 :notebook: SDG 13:
         """
-        return ':notebook: *#BOOKNAME*'.replace("#BOOKNAME", book_name)
+        def emoji() -> str:
+            if self._emojis and len(self._emojis):
+                return sample(self._emojis, 1)[0]
+            return sample(book_emojis, 1)[0]
+
+        book_text = ':#EMOJI: *#BOOKNAME*:'
+        book_text = book_text.replace('#EMOJI', emoji())
+        book_text = book_text.replace("#BOOKNAME", book_name)
+
+        return book_text
 
     @ staticmethod
     def _primary_text_only(primary_text: str,

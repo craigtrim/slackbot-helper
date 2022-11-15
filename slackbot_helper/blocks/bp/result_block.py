@@ -3,12 +3,14 @@
 """ Standardized API for Dealing with Slack Blocks """
 
 
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 from baseblock import BaseObject
 
-from slackbot_helper.blocks.dmo import (BookOnlyBlock, ChapterAndPageBlock,
-                                        StandardTextBlock)
+from slackbot_helper.blocks.dmo import BookOnlyBlock
+from slackbot_helper.blocks.dmo import ChapterAndPageBlock
+from slackbot_helper.blocks.dmo import StandardTextBlock
 
 
 class ResultBlock(BaseObject):
@@ -24,8 +26,6 @@ class ResultBlock(BaseObject):
                 https://github.com/craigtrim/slackbot-helper/issues/2
         """
         BaseObject.__init__(self, __name__)
-        self._book_only = BookOnlyBlock().process
-        self._chapter_and_page_block = ChapterAndPageBlock().process
         self._standard_text_block = StandardTextBlock().process
 
     def text_block(self,
@@ -54,7 +54,8 @@ class ResultBlock(BaseObject):
                   book_name: str,
                   book_button_text: str,
                   slack_channel_id: str,
-                  slack_thread_ts: Optional[str] = None) -> dict:
+                  slack_thread_ts: Optional[str] = None,
+                  emojis: Optional[List[str]] = None) -> dict:
         """ Create a Slack Block with a Book Reference Only
 
         Args:
@@ -65,11 +66,17 @@ class ResultBlock(BaseObject):
             book_button_text (str): the name to display on the button
             slack_channel_id (str): the Slack Channel ID
             slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
+            emojis (Optional[List[str]], optional): a list of emojis to sample from for the result block
+                if left empty, the block will generate a suitable emoji
 
         Returns:
             dict: the display block
         """
-        return self._book_only(
+
+        if not emojis or not len(emojis):
+            emojis = []
+
+        return BookOnlyBlock().process(
             primary_text=primary_text,
             secondary_text=secondary_text,
             book_url=book_url,
@@ -86,7 +93,8 @@ class ResultBlock(BaseObject):
                                chapter_number: int,
                                book_name: str,
                                slack_channel_id: str,
-                               slack_thread_ts: Optional[str] = None) -> dict:
+                               slack_thread_ts: Optional[str] = None,
+                               emojis: Optional[List[str]] = None) -> dict:
         """ Create a Slack Block with a Chapter and Page Reference
 
         Args:
@@ -98,11 +106,17 @@ class ResultBlock(BaseObject):
             book_name (str): the name of the book (label form)
             slack_channel_id (str): the Slack Channel ID
             slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
+            emojis (Optional[List[str]], optional): a list of emojis to sample from for the result block
+                if left empty, the block will generate a suitable emoji
 
         Returns:
             dict: the display block
         """
-        return self._chapter_and_page_block(
+
+        if not emojis or not len(emojis):
+            emojis = []
+
+        return ChapterAndPageBlock(emojis).process(
             primary_text=primary_text,
             secondary_text=secondary_text,
             page_url=page_url,

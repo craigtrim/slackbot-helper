@@ -39,32 +39,36 @@ class BookOnlyBlock(BaseObject):
         BaseObject.__init__(self, __name__)
         self._emojis = emojis
 
-    def _book_name_text(self,
-                        book_name: str) -> str:
-        """ Format the Provenance Description
+    # def _book_name_text(self,
+    #                     book_name: str) -> str:
+    #     """ Format the Provenance Description
 
-        Args:
-            book_name (str): the name of the book (label form)
+    #     Args:
+    #         book_name (str): the name of the book (label form)
 
-        Returns:
-            str: the provenance output
-            Sample Output:
-                :notebook: SDG 13:
-        """
-        def emoji() -> str:
-            if self._emojis and len(self._emojis):
-                return sample(self._emojis, 1)[0]
-            return sample(book_emojis, 1)[0]
+    #     Returns:
+    #         str: the provenance output
+    #         Sample Output:
+    #             :notebook: SDG 13:
+    #     """
+    #     def emoji() -> str:
+    #         if self._emojis and len(self._emojis):
+    #             return sample(self._emojis, 1)[0]
+    #         return sample(book_emojis, 1)[0]
 
-        book_text = ':#EMOJI: *#BOOKNAME*:'
-        book_text = book_text.replace('#EMOJI', emoji())
-        book_text = book_text.replace("#BOOKNAME", book_name)
+    #     book_text = ':#EMOJI: *#BOOKNAME*:'
+    #     book_text = book_text.replace('#EMOJI', emoji())
+    #     book_text = book_text.replace("#BOOKNAME", book_name)
 
-        return book_text
+    #     return book_text
+
+    def _find_emoji(self) -> str:
+        if self._emojis and len(self._emojis):
+            return sample(self._emojis, 1)[0]
+        return sample(book_emojis, 1)[0]
 
     @ staticmethod
     def _primary_text_only(primary_text: str,
-                           book_name: str,
                            book_button_text: str,
                            book_url: str) -> list:
         return [
@@ -103,7 +107,6 @@ class BookOnlyBlock(BaseObject):
     @staticmethod
     def _secondary_text(primary_text: str,
                         secondary_text: List[str],
-                        book_name: str,
                         book_button_text: str,
                         book_url: str) -> list:
         return [
@@ -169,20 +172,19 @@ class BookOnlyBlock(BaseObject):
             dict: the display block
         """
 
-        book_name = self._book_name_text(book_name)
+        # book_name = self._book_name_text(book_name)
+        book_button_text = f"{self._find_emoji()} {book_button_text}"
 
         def decide() -> list:
             if secondary_text and len(secondary_text):
                 return self._secondary_text(
                     book_url=book_url,
-                    book_name=book_name,
                     book_button_text=book_button_text,
                     primary_text=primary_text,
                     secondary_text=secondary_text)
 
             return self._primary_text_only(
                 book_url=book_url,
-                book_name=book_name,
                 book_button_text=book_button_text,
                 primary_text=primary_text)
 

@@ -141,6 +141,11 @@ class BookOnlyBlock(BaseObject):
 
         book_button_text = f"{self._find_emoji()} {book_button_text}"
 
+        if self._target_user_ids and len(self._target_user_ids):
+            target_users = ' '.join(
+                [f"<@{x}>" for x in self._target_user_ids]).strip()
+            primary_text = f"{target_users} {primary_text}"
+
         def decide() -> list:
             if secondary_text and len(secondary_text):
                 return self._secondary_text(

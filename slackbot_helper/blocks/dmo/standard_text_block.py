@@ -86,13 +86,16 @@ class StandardTextBlock(BaseObject):
     def process(self,
                 output_text: str,
                 slack_channel_id: str,
-                slack_thread_ts: Optional[str] = None) -> dict:
+                slack_thread_ts: Optional[str] = None,
+                target_user_ids: Optional[str] = None) -> dict:
         """ Entry Point
 
         Args:
             output_text (str): the outgoing slack message
             slack_channel_id (str): the Slack Channel ID
             slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
+            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+                if left empty, the response will not target any specific Slack IDs
 
         Returns:
             dict: the display block
@@ -100,6 +103,11 @@ class StandardTextBlock(BaseObject):
 
         if not output_text or not len(output_text):
             return None
+
+        if target_user_ids and len(target_user_ids):
+            target_users = ' '.join(
+                [f"<@{x}>" for x in target_user_ids]).strip()
+            output_text = f"{target_users} {output_text}"
 
         def get_blocks() -> list:
             if 'https:' not in output_text:

@@ -207,6 +207,11 @@ class ChapterAndPageBlock(BaseObject):
             dict: the display block
         """
 
+        if self._target_user_ids and len(self._target_user_ids):
+            target_users = ' '.join(
+                [f"<@{x}>" for x in self._target_user_ids]).strip()
+            primary_text = f"{target_users} {primary_text}"
+
         book_name_text = self._book_name_text(
             book_name=book_name,
             chapter_number=chapter_number)

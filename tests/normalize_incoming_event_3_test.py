@@ -29,16 +29,12 @@ d_event_incoming = {
 
 d_event_expected = {
     'analysis': {
-        'commands': [
-
-        ],
+        'commands': [],
         'meta_mode': 'bot2bot',
         'meta_type': 'H2H_SINGLE',
         'text_1': '<@U045HCSMG8K> How long can particulate pollution remain airborne',
         'text_2': 'How long can particulate pollution remain airborne.',
-        'user_all': [
-            'U045HCSMG8K'
-        ],
+        'user_all': ['U045HCSMG8K'],
         'user_source': 'U046G4FURQT',
         'user_target': 'U045HCSMG8K'
     },

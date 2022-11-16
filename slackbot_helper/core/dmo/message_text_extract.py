@@ -47,6 +47,11 @@ class MessageTextExtract(BaseObject):
             craigtrim@gmail.com
             *   updated algorithm
                 https://github.com/craigtrim/slackbot-helper/issues/1
+        Updated:
+            16-Nov-2022
+            craigtrim@gmail.com
+            *   fix block extraction defect
+                https://github.com/craigtrim/slackbot-helper/issues/6
         """
         BaseObject.__init__(self, __name__)
 
@@ -68,8 +73,10 @@ class MessageTextExtract(BaseObject):
             for block in d_event['blocks']:
 
                 if 'elements' in block:
-
                     for element in block['elements']:
+
+                        if 'elements' not in element:
+                            continue  # slackbot-helper/issues/6
 
                         for inner in element['elements']:
 
@@ -91,6 +98,7 @@ class MessageTextExtract(BaseObject):
                 if 'text' in block:  # slackbot-helper/issues/1
                     if 'text' not in block['text']:
                         raise NotImplementedError(block['text'])
+
                     if block['text']['type'] in self.__known_text_types:
                         message.append(block['text']['text'])
 

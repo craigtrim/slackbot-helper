@@ -36,6 +36,11 @@ class UserIdExtract(BaseObject):
             craigtrim@gmail.com
             *   updated algorithm
                 https://github.com/craigtrim/slackbot-helper/issues/1
+        Updated:
+            16-Nov-2022
+            craigtrim@gmail.com
+            *   fix defect in user-id-extraction
+                https://github.com/craigtrim/slackbot-helper/issues/5
         """
         BaseObject.__init__(self, __name__)
 
@@ -94,8 +99,10 @@ class UserIdExtract(BaseObject):
                             log_error("Event Structure Not Recognized")
                             raise NotImplementedError
 
-                        [user_ids.append(x) for x in self._extract_ids(
-                            block['text']['text'])]
+                        extracted_ids = self._extract_ids(
+                            block['text']['text'])
+                        if extracted_ids:  # slackbot-helper/issues/5
+                            [user_ids.append(x) for x in extracted_ids]
 
                     elif 'accessory' in block:  # this happens with formatted messages, like when giphy images are returned
                         pass  # TODO: can extract, but for now will pass

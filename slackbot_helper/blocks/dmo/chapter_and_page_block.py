@@ -21,7 +21,8 @@ class ChapterAndPageBlock(BaseObject):
     """
 
     def __init__(self,
-                 emojis: Optional[List[str]] = None):
+                 emojis: Optional[List[str]] = None,
+                 target_user_ids: Optional[List[str]] = None):
         """ Change Log
 
         Created:
@@ -42,9 +43,12 @@ class ChapterAndPageBlock(BaseObject):
         Args:
             emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
                 if left empty, will sample from 'book' themed slack emojis
+            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+                if left empty, the response will not target any specific Slack IDs
         """
         BaseObject.__init__(self, __name__)
         self._emojis = emojis
+        self._target_user_ids = target_user_ids
 
     def _book_name_text(self,
                         chapter_number: int,

@@ -55,7 +55,8 @@ class ResultBlock(BaseObject):
                   book_button_text: str,
                   slack_channel_id: str,
                   slack_thread_ts: Optional[str] = None,
-                  emojis: Optional[List[str]] = None) -> dict:
+                  emojis: Optional[List[str]] = None,
+                  target_user_ids: Optional[List[str]] = None) -> dict:
         """ Create a Slack Block with a Book Reference Only
 
         Args:
@@ -68,6 +69,8 @@ class ResultBlock(BaseObject):
             slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
             emojis (Optional[List[str]], optional): a list of emojis to sample from for the result block
                 if left empty, the block will generate a suitable emoji
+            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+                if left empty, the response will not target any specific Slack IDs
 
         Returns:
             dict: the display block
@@ -76,7 +79,14 @@ class ResultBlock(BaseObject):
         if not emojis or not len(emojis):
             emojis = []
 
-        return BookOnlyBlock(emojis).process(
+        if not target_user_ids or not len(target_user_ids):
+            target_user_ids = []
+
+        dmo = BookOnlyBlock(
+            emojis=emojis,
+            target_user_ids=target_user_ids)
+
+        return dmo.process(
             primary_text=primary_text,
             secondary_text=secondary_text,
             book_url=book_url,
@@ -94,7 +104,8 @@ class ResultBlock(BaseObject):
                                book_name: str,
                                slack_channel_id: str,
                                slack_thread_ts: Optional[str] = None,
-                               emojis: Optional[List[str]] = None) -> dict:
+                               emojis: Optional[List[str]] = None,
+                               target_user_ids: Optional[List[str]] = None) -> dict:
         """ Create a Slack Block with a Chapter and Page Reference
 
         Args:
@@ -108,6 +119,8 @@ class ResultBlock(BaseObject):
             slack_thread_ts (Optional[str], optional): the Slack Thread timestamp. Defaults to None.
             emojis (Optional[List[str]], optional): a list of emojis to sample from for the result block
                 if left empty, the block will generate a suitable emoji
+            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+                if left empty, the response will not target any specific Slack IDs
 
         Returns:
             dict: the display block
@@ -116,7 +129,14 @@ class ResultBlock(BaseObject):
         if not emojis or not len(emojis):
             emojis = []
 
-        return ChapterAndPageBlock(emojis).process(
+        if not target_user_ids or not len(target_user_ids):
+            target_user_ids = []
+
+        dmo = ChapterAndPageBlock(
+            emojis=emojis,
+            target_user_ids=target_user_ids)
+
+        return dmo.process(
             primary_text=primary_text,
             secondary_text=secondary_text,
             page_url=page_url,

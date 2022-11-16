@@ -23,7 +23,8 @@ class BookOnlyBlock(BaseObject):
     """
 
     def __init__(self,
-                 emojis: Optional[List[str]] = None):
+                 emojis: Optional[List[str]] = None,
+                 target_user_ids: Optional[List[str]] = None):
         """ Change Log
 
         Created:
@@ -35,32 +36,12 @@ class BookOnlyBlock(BaseObject):
         Args:
             emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
                 if left empty, will sample from 'book' themed slack emojis
+            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+                if left empty, the response will not target any specific Slack IDs
         """
         BaseObject.__init__(self, __name__)
         self._emojis = emojis
-
-    # def _book_name_text(self,
-    #                     book_name: str) -> str:
-    #     """ Format the Provenance Description
-
-    #     Args:
-    #         book_name (str): the name of the book (label form)
-
-    #     Returns:
-    #         str: the provenance output
-    #         Sample Output:
-    #             :notebook: SDG 13:
-    #     """
-    #     def emoji() -> str:
-    #         if self._emojis and len(self._emojis):
-    #             return sample(self._emojis, 1)[0]
-    #         return sample(book_emojis, 1)[0]
-
-    #     book_text = ':#EMOJI: *#BOOKNAME*:'
-    #     book_text = book_text.replace('#EMOJI', emoji())
-    #     book_text = book_text.replace("#BOOKNAME", book_name)
-
-    #     return book_text
+        self._target_user_ids = target_user_ids
 
     def _find_emoji(self) -> str:
         if self._emojis and len(self._emojis):
@@ -82,13 +63,6 @@ class BookOnlyBlock(BaseObject):
             {
                 "type": "divider"
             },
-            # {
-            #     "type": "section",
-            #     "text": {
-            #         "type": "mrkdwn",
-            #         "text": book_name
-            #     }
-            # },
             {
                 "type": "actions",
                 "elements": [
@@ -127,13 +101,6 @@ class BookOnlyBlock(BaseObject):
             {
                 "type": "divider"
             },
-            # {
-            #     "type": "section",
-            #     "text": {
-            #         "type": "mrkdwn",
-            #         "text": book_name
-            #     }
-            # },
             {
                 "type": "actions",
                 "elements": [
@@ -172,7 +139,6 @@ class BookOnlyBlock(BaseObject):
             dict: the display block
         """
 
-        # book_name = self._book_name_text(book_name)
         book_button_text = f"{self._find_emoji()} {book_button_text}"
 
         def decide() -> list:

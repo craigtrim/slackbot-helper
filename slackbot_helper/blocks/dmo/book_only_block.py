@@ -24,7 +24,7 @@ class BookOnlyBlock(BaseObject):
 
     def __init__(self,
                  emojis: Optional[List[str]] = None,
-                 target_user_ids: Optional[List[str]] = None):
+                 target_users: Optional[str] = None):
         """ Change Log
 
         Created:
@@ -36,12 +36,12 @@ class BookOnlyBlock(BaseObject):
         Args:
             emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
                 if left empty, will sample from 'book' themed slack emojis
-            target_user_ids (Optional[List[str]], optional): the Slack User ID to target with this response. Defaults to None.
+            target_users (Optional[str], optional): the Slack User IDs to target with this response. Defaults to None.
                 if left empty, the response will not target any specific Slack IDs
         """
         BaseObject.__init__(self, __name__)
         self._emojis = emojis
-        self._target_user_ids = target_user_ids
+        self._target_users = target_users
 
     def _find_emoji(self) -> str:
         if self._emojis and len(self._emojis):
@@ -140,11 +140,7 @@ class BookOnlyBlock(BaseObject):
         """
 
         book_button_text = f"{self._find_emoji()} {book_button_text}"
-
-        if self._target_user_ids and len(self._target_user_ids):
-            target_users = ' '.join(
-                [f"<@{x}>" for x in self._target_user_ids]).strip()
-            primary_text = f"{target_users} {primary_text}"
+        primary_text = f"{self._target_users} {primary_text}"
 
         def decide() -> list:
             if secondary_text and len(secondary_text):

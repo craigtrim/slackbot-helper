@@ -19,6 +19,11 @@ class FuzzyMatchHighlighter(BaseObject):
             28-Oct-2022
             craigtrim@gmail.com
             *   refactored out of 'highlight-output-text'
+        Updated:
+            16-Nov-2022
+            craigtrim@gmail.com
+            *   Fix null input defect
+                https://github.com/craigtrim/slackbot-helper/issues/4
         """
         BaseObject.__init__(self, __name__)
 

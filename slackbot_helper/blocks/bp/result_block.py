@@ -76,7 +76,7 @@ class ResultBlock(BaseObject):
         if not emojis or not len(emojis):
             emojis = []
 
-        return BookOnlyBlock().process(
+        return BookOnlyBlock(emojis).process(
             primary_text=primary_text,
             secondary_text=secondary_text,
             book_url=book_url,

@@ -74,6 +74,6 @@ class TransformIncomingEvent(BaseObject):
                 Enforcer.is_list(d['blocks'])
 
         if self.isEnabledForInfo:
-            self.logger.info(f"Service Event\n{pformat(d)}")
+            self.logger.info(f'Service Event\n{pformat(d)}')
 
         return d

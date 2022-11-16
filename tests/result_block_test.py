@@ -140,5 +140,5 @@ def main():
     test_chapter_and_page_block()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

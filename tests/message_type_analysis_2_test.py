@@ -9,23 +9,23 @@ from slackbot_helper.core.dto import MessageType
 
 # FOR REFERENCE ONLY ... not used in test
 d_event_incoming = {
-    "blocks": [
+    'blocks': [
         {
-            "block_id": "4rdo",
-            "text": {
-                "text": "<@U045HCSMG8K> How long can particulate pollution remain airborne",
-                "type": "mrkdwn",
-                "verbatim": False
+            'block_id': '4rdo',
+            'text': {
+                'text': '<@U045HCSMG8K> How long can particulate pollution remain airborne',
+                'type': 'mrkdwn',
+                'verbatim': False
             },
-            "type": "section"
+            'type': 'section'
         }
     ],
-    "channel": "C046DB9TLEL",
-    "team": "T045AR44M70",
-    "text": "<@U045HCSMG8K> How long can particulate pollution remain airborne?",
-    "ts": 1665724403.461959,
-    "type": "app_mention",
-    "user": "U046G4FURQT"
+    'channel': 'C046DB9TLEL',
+    'team': 'T045AR44M70',
+    'text': '<@U045HCSMG8K> How long can particulate pollution remain airborne?',
+    'ts': 1665724403.461959,
+    'type': 'app_mention',
+    'user': 'U046G4FURQT'
 }
 
 
@@ -34,9 +34,9 @@ def test_component_1():
     # 20221013; this is what actually happened
 
     dmo = MessageTypeAnalysis(
-        user_ids=["U045HCSMG8K"],
+        user_ids=['U045HCSMG8K'],
         bot_ids=[],
-        message_text="<@U045HCSMG8K> How long can particulate pollution remain airborne")
+        message_text='<@U045HCSMG8K> How long can particulate pollution remain airborne')
 
     assert dmo
 
@@ -59,9 +59,9 @@ def test_component_2():
     # 20221013; what if we populate 'bot_ids=[]' with both iceberg and student?
 
     dmo = MessageTypeAnalysis(
-        user_ids=["U045HCSMG8K"],
-        bot_ids=["U046G4FURQT", "U045HCSMG8K"],
-        message_text="<@U045HCSMG8K> How long can particulate pollution remain airborne")
+        user_ids=['U045HCSMG8K'],
+        bot_ids=['U046G4FURQT', 'U045HCSMG8K'],
+        message_text='<@U045HCSMG8K> How long can particulate pollution remain airborne')
 
     assert dmo
 
@@ -86,5 +86,5 @@ def main():
     test_component_2()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

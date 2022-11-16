@@ -76,9 +76,9 @@ class UserIdExtract(BaseObject):
         def log_error(message: str) -> None:
             self.logger.error('\n'.join([
                 message,
-                "\tStart Event Block ---------------------------",
-                f"\t{pformat(d_event)}",
-                "\t----------------------------- End Event Block"]))
+                '\tStart Event Block ---------------------------',
+                f'\t{pformat(d_event)}',
+                '\t----------------------------- End Event Block']))
 
         # typically an event that comes from a user ...
         if 'blocks' in d_event:
@@ -96,7 +96,7 @@ class UserIdExtract(BaseObject):
 
                     elif 'text' in block:  # slackbot-helper/issues/1
                         if 'text' not in block['text']:
-                            log_error("Event Structure Not Recognized")
+                            log_error('Event Structure Not Recognized')
                             raise NotImplementedError
 
                         extracted_ids = self._extract_ids(
@@ -114,14 +114,14 @@ class UserIdExtract(BaseObject):
                 return None
 
             except KeyError:
-                log_error("Event Structure Parse Error for Blocks")
+                log_error('Event Structure Parse Error for Blocks')
                 raise ValueError
 
         # typically an event that comes from a bot ...
         if 'channel' in d_event:
             return self._extract_ids(d_event['text'])
 
-        log_error("Event Structure Not Recognized")
+        log_error('Event Structure Not Recognized')
         raise NotImplementedError
 
     @staticmethod
@@ -161,13 +161,13 @@ class UserIdExtract(BaseObject):
 
             if results:
                 self.logger.debug('\n'.join([
-                    "User ID Extraction Completed",
-                    f"\tTotal Time: {str(sw)}",
-                    f"\tTotal User IDs: {len(results)}"]))
+                    'User ID Extraction Completed',
+                    f'\tTotal Time: {str(sw)}',
+                    f'\tTotal User IDs: {len(results)}']))
             else:
                 self.logger.debug('\n'.join([
-                    "User ID Extraction Completed",
-                    f"\tTotal Time: {str(sw)}",
-                    "\tNo User IDs Found"]))
+                    'User ID Extraction Completed',
+                    f'\tTotal Time: {str(sw)}',
+                    '\tNo User IDs Found']))
 
         return results

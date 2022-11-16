@@ -2,20 +2,20 @@
 from setuptools import setup
 
 packages = \
-['slackbot_helper',
- 'slackbot_helper.bp',
- 'slackbot_helper.dmo',
- 'slackbot_helper.dto',
- 'slackbot_helper.svc']
+    ['slackbot_helper',
+     'slackbot_helper.bp',
+     'slackbot_helper.dmo',
+     'slackbot_helper.dto',
+     'slackbot_helper.svc']
 
 package_data = \
-{'': ['*']}
+    {'': ['*']}
 
 install_requires = \
-['baseblock',
- 'fast_sentence_tokenize',
- 'slack-bolt>=1.14.3,<2.0.0',
- 'slackclient>=2.9.4,<3.0.0']
+    ['baseblock',
+     'fast_sentence_tokenize',
+     'slack-bolt>=1.14.3,<2.0.0',
+     'slackclient>=2.9.4,<3.0.0']
 
 setup_kwargs = {
     'name': 'slackbot-helper',

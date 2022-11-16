@@ -66,7 +66,7 @@ class AnalyzeSlackEvent(BaseObject):
         elif d_message_type['message_type'] in [
             MessageType.B2H_RESPONSE,
         ]:
-            return "bot2human"
+            return 'bot2human'
 
         return 'bot2bot'
 
@@ -97,9 +97,9 @@ class AnalyzeSlackEvent(BaseObject):
         mode_of_address = self._mode_of_address(d_message_type)
 
         return {
-            "text_1": message_text,
-            "text_2": d_message_type['message_text'],
-            "commands": d_message_type['commands'],
+            'text_1': message_text,
+            'text_2': d_message_type['message_text'],
+            'commands': d_message_type['commands'],
             'meta_mode': mode_of_address,
             'meta_type': d_message_type['message_type'].name,
             'user_source': source_user_id,
@@ -121,8 +121,8 @@ class AnalyzeSlackEvent(BaseObject):
 
         if d_event and self.isEnabledForInfo:
             self.logger.info('\n'.join([
-                "Retrieved Slack Event",
-                f"\tTotal Time: {str(sw)}",
+                'Retrieved Slack Event',
+                f'\tTotal Time: {str(sw)}',
                 pformat(d_analyzed)]))
 
         return d_analyzed

@@ -7,43 +7,43 @@ from pprint import pprint
 from slackbot_helper.core.svc import AnalyzeSlackEvent
 
 d_event_incoming = {
-    "blocks": [
+    'blocks': [
         {
-            "block_id": "m5kF",
-            "elements": [
+            'block_id': 'm5kF',
+            'elements': [
                 {
-                    "elements": [
+                    'elements': [
                         {
-                            "type": "user",
-                            "user_id": "U046G4FURQT"
+                            'type': 'user',
+                            'user_id': 'U046G4FURQT'
                         },
                         {
-                            "text": " please ask ",
-                            "type": "text"
+                            'text': ' please ask ',
+                            'type': 'text'
                         },
                         {
-                            "type": "user",
-                            "user_id": "U045HCSMG8K"
+                            'type': 'user',
+                            'user_id': 'U045HCSMG8K'
                         },
                         {
-                            "text": " a random question",
-                            "type": "text"
+                            'text': ' a random question',
+                            'type': 'text'
                         }
                     ],
-                    "type": "rich_text_section"
+                    'type': 'rich_text_section'
                 }
             ],
-            "type": "rich_text"
+            'type': 'rich_text'
         }
     ],
-    "channel": "C046DB9TLEL",
-    "client_msg_id": "bd324672-9e87-4629-af81-aaa4d701082b",
-    "event_ts": "1665723755.778069",
-    "team": "T045AR44M70",
-    "text": "<@U046G4FURQT> please ask <@U045HCSMG8K> a random question",
-    "ts": "1665723755.778069",
-    "type": "app_mention",
-    "user": "U04674UNRBJ"
+    'channel': 'C046DB9TLEL',
+    'client_msg_id': 'bd324672-9e87-4629-af81-aaa4d701082b',
+    'event_ts': '1665723755.778069',
+    'team': 'T045AR44M70',
+    'text': '<@U046G4FURQT> please ask <@U045HCSMG8K> a random question',
+    'ts': '1665723755.778069',
+    'type': 'app_mention',
+    'user': 'U04674UNRBJ'
 }
 
 
@@ -82,5 +82,5 @@ def main():
     test_service()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

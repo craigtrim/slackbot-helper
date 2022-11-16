@@ -64,9 +64,9 @@ class MessageTypeAnalysis(BaseObject):
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
-                "Initialized Component",
-                f"\tMessage Text: {message_text}",
-                f"\tUser IDs: {user_ids}"]))
+                'Initialized Component',
+                f'\tMessage Text: {message_text}',
+                f'\tUser IDs: {user_ids}']))
 
     def _analyze_type(self) -> MessageType:
 
@@ -100,10 +100,10 @@ class MessageTypeAnalysis(BaseObject):
 
         if self.isEnabledForWarning:
             self.logger.warning('\n'.join([
-                "Unrecognized Message Type",
-                f"\tBot IDs: {bot_ids}",
-                f"\tHuman IDs: {human_ids}",
-                f"\tMessage Text: {self._message_text}"]))
+                'Unrecognized Message Type',
+                f'\tBot IDs: {bot_ids}',
+                f'\tHuman IDs: {human_ids}',
+                f'\tMessage Text: {self._message_text}']))
 
         return MessageType.OTHER
 
@@ -115,8 +115,8 @@ class MessageTypeAnalysis(BaseObject):
 
         message_text = self._message_text
         for user_id in self._user_ids:
-            message_text = message_text.replace(f"<@{user_id}>", "")
-            message_text = message_text.replace(f"@{user_id}", "")
+            message_text = message_text.replace(f'<@{user_id}>', '')
+            message_text = message_text.replace(f'@{user_id}', '')
 
         while '  ' in message_text:
             message_text = message_text.replace('  ', ' ').strip()
@@ -125,7 +125,7 @@ class MessageTypeAnalysis(BaseObject):
             return message_text
 
         if message_text[-1] not in ['.', '!', '?']:
-            message_text = f"{message_text}."
+            message_text = f'{message_text}.'
 
         return message_text.strip()
 
@@ -190,9 +190,9 @@ class MessageTypeAnalysis(BaseObject):
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
-                "Message Text Analysis Completed",
-                f"\tTotal Time: {str(sw)}",
-                f"\tMessage Type: {message_type}",
-                f"\tMessage Text: {message_text}"]))
+                'Message Text Analysis Completed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tMessage Type: {message_type}',
+                f'\tMessage Text: {message_text}']))
 
         return svcresult

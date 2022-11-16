@@ -50,10 +50,10 @@ class StandardTextBlock(BaseObject):
                   output_text: str) -> list:
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",  # 20220914; use 'mrkdwn' to properly format <@UserId> statements
-                    "text": output_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',  # 20220914; use 'mrkdwn' to properly format <@UserId> statements
+                    'text': output_text
                 }
             }
         ]
@@ -70,15 +70,15 @@ class StandardTextBlock(BaseObject):
 
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': text
                 },
-                "accessory": {
-                    "type": "image",
-                    "image_url": url,
-                    "alt_text": None
+                'accessory': {
+                    'type': 'image',
+                    'image_url': url,
+                    'alt_text': None
                 }
             }
         ]
@@ -104,7 +104,7 @@ class StandardTextBlock(BaseObject):
         if not output_text or not len(output_text):
             return None
 
-        output_text = f"{target_users} {output_text}"
+        output_text = f'{target_users} {output_text}'
 
         def get_blocks() -> list:
             if 'https:' not in output_text:
@@ -119,7 +119,7 @@ class StandardTextBlock(BaseObject):
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
-                "Constructed Outgoing Event",
-                f"\tOutgoing Event:\n{pformat(d_event_outgoing)}"]))
+                'Constructed Outgoing Event',
+                f'\tOutgoing Event:\n{pformat(d_event_outgoing)}']))
 
         return d_event_outgoing

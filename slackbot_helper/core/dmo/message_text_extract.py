@@ -112,7 +112,7 @@ class MessageTextExtract(BaseObject):
             return self._to_string(message)
 
         self.logger.error('\n'.join([
-            "Event Structure Not Recognized",
+            'Event Structure Not Recognized',
             pformat(d_event)]))
 
         raise NotImplementedError
@@ -133,8 +133,8 @@ class MessageTextExtract(BaseObject):
 
         if self.isEnabledForDebug:
             self.logger.debug('\n'.join([
-                "Message Text Extraction Completed",
-                f"\tTotal Time: {str(sw)}",
-                f"\tMessage Text: {message_text}"]))
+                'Message Text Extraction Completed',
+                f'\tTotal Time: {str(sw)}',
+                f'\tMessage Text: {message_text}']))
 
         return message_text

@@ -73,11 +73,11 @@ class ChapterAndPageBlock(BaseObject):
         # the '0' chapter is always the book's Introduction
         if chapter_number == 0:
             return ':book: *#BOOKNAME* Introduction:'.replace(
-                "#BOOKNAME", book_name)
+                '#BOOKNAME', book_name)
 
         book_text = ':#EMOJI: *#BOOKNAME* Chapter #CHAPTER:'
         book_text = book_text.replace('#EMOJI', emoji())
-        book_text = book_text.replace("#BOOKNAME", book_name)
+        book_text = book_text.replace('#BOOKNAME', book_name)
         book_text = book_text.replace('#CHAPTER', str(chapter_number))
 
         return book_text
@@ -89,40 +89,40 @@ class ChapterAndPageBlock(BaseObject):
                            chapter_url: str) -> list:
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": primary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': primary_text
                 }
             },
             {
-                "type": "divider"
+                'type': 'divider'
             },
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": book_name_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': book_name_text
                 }
             },
             {
-                "type": "actions",
-                "elements": [
+                'type': 'actions',
+                'elements': [
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Results Page Only"
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': 'Results Page Only'
                         },
-                        "url": page_url
+                        'url': page_url
                     },
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Entire Chapter"
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': 'Entire Chapter'
                         },
-                        "url": chapter_url
+                        'url': chapter_url
                     }
                 ]
             }
@@ -136,47 +136,47 @@ class ChapterAndPageBlock(BaseObject):
                         book_name_text: str) -> str:
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": primary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': primary_text
                 }
             },
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": secondary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': secondary_text
                 }
             },
             {
-                "type": "divider"
+                'type': 'divider'
             },
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": book_name_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': book_name_text
                 }
             },
             {
-                "type": "actions",
-                "elements": [
+                'type': 'actions',
+                'elements': [
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Results Page Only"
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': 'Results Page Only'
                         },
-                        "url": page_url
+                        'url': page_url
                     },
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Entire Chapter"
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': 'Entire Chapter'
                         },
-                        "url": chapter_url
+                        'url': chapter_url
                     }
                 ]
             }
@@ -207,7 +207,7 @@ class ChapterAndPageBlock(BaseObject):
             dict: the display block
         """
 
-        primary_text = f"{self._target_users} {primary_text}".strip()
+        primary_text = f'{self._target_users} {primary_text}'.strip()
 
         book_name_text = self._book_name_text(
             book_name=book_name,

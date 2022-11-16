@@ -7,80 +7,80 @@ from slackbot_helper.core.bp import NormalizeIncomingEvent
 from slackbot_helper.core.dto import SlackIds
 
 d_incoming = {
-    "blocks": [
+    'blocks': [
         {
-            "block_id": "vz+U",
-            "elements": [
+            'block_id': 'vz+U',
+            'elements': [
                 {
-                    "elements": [
+                    'elements': [
                         {
-                            "type": "user",
-                            "user_id": "U045HCSMG8K"
+                            'type': 'user',
+                            'user_id': 'U045HCSMG8K'
                         },
                         {
-                            "text": " dead ahead!",
-                            "type": "text"
+                            'text': ' dead ahead!',
+                            'type': 'text'
                         }
                     ],
-                    "type": "rich_text_section"
+                    'type': 'rich_text_section'
                 }
             ],
-            "type": "rich_text"
+            'type': 'rich_text'
         }
     ],
-    "channel": "C046DB9TLEL",
-    "team": "T045AR44M70",
-    "text": "<@U045HCSMG8K> dead ahead!",
-    "ts": 1665195085.499959,
-    "type": "app_mention",
-    "user": "U04674UNRBJ"
+    'channel': 'C046DB9TLEL',
+    'team': 'T045AR44M70',
+    'text': '<@U045HCSMG8K> dead ahead!',
+    'ts': 1665195085.499959,
+    'type': 'app_mention',
+    'user': 'U04674UNRBJ'
 }
 
 d_normalized_expected = {
-    "analysis": {
-        "commands": [
+    'analysis': {
+        'commands': [
 
         ],
-        "meta_mode": "human2bot",
-        "meta_type": "H2B_SINGLE",
-        "text_1": "@U045HCSMG8K dead ahead!",
-        "text_2": "dead ahead!",
-        "user_all": [
-            "U045HCSMG8K"
+        'meta_mode': 'human2bot',
+        'meta_type': 'H2B_SINGLE',
+        'text_1': '@U045HCSMG8K dead ahead!',
+        'text_2': 'dead ahead!',
+        'user_all': [
+            'U045HCSMG8K'
         ],
-        "user_source": "U04674UNRBJ",
-        "user_target": "U045HCSMG8K"
+        'user_source': 'U04674UNRBJ',
+        'user_target': 'U045HCSMG8K'
     },
-    "event": {
-        "blocks": [
+    'event': {
+        'blocks': [
             {
-                "block_id": "vz+U",
-                "elements": [
+                'block_id': 'vz+U',
+                'elements': [
                     {
-                            "elements": [
+                            'elements': [
                                 {
-                                    "type": "user",
-                                    "user_id": "U045HCSMG8K"
+                                    'type': 'user',
+                                    'user_id': 'U045HCSMG8K'
                                 },
                                 {
-                                    "text": " dead ahead!",
-                                    "type": "text"
+                                    'text': ' dead ahead!',
+                                    'type': 'text'
                                 }
                             ],
-                        "type": "rich_text_section"
+                        'type': 'rich_text_section'
                     }
                 ],
-                "type": "rich_text"
+                'type': 'rich_text'
             }
         ],
-        "channel": "C046DB9TLEL",
-        "team": "T045AR44M70",
-        "text": "<@U045HCSMG8K> dead ahead!",
-        "ts": 1665195085.499959,
-        "type": "app_mention",
-        "user": "U04674UNRBJ"
+        'channel': 'C046DB9TLEL',
+        'team': 'T045AR44M70',
+        'text': '<@U045HCSMG8K> dead ahead!',
+        'ts': 1665195085.499959,
+        'type': 'app_mention',
+        'user': 'U04674UNRBJ'
     },
-    "membership": "85e8d1eb_46c2_11ed_97a0_4c1d96716627"
+    'membership': '85e8d1eb_46c2_11ed_97a0_4c1d96716627'
 }
 
 
@@ -130,5 +130,5 @@ def main():
     test_root_init()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

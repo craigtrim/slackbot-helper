@@ -105,19 +105,19 @@ class FuzzyMatchHighlighter(BaseObject):
         if common_phrase not in text_2_lower:
             if self.isEnabledForWarning:
                 self.logger.warning('\n'.join([
-                    "Common Phrase Not Found in Text 2",
-                    f"\tCommon Phrase: {common_phrase}",
-                    f"\tText 2: {text_2_lower}"]))
+                    'Common Phrase Not Found in Text 2',
+                    f'\tCommon Phrase: {common_phrase}',
+                    f'\tText 2: {text_2_lower}']))
             return None
 
         x = text_2_lower.index(common_phrase)
         y = x + len(common_phrase)
 
         start = text_2[:x]
-        mid = f"*{text_2[x:y]}*"
+        mid = f'*{text_2[x:y]}*'
         end = text_2[y:]
 
-        final = f"{start} {mid} {end}"
+        final = f'{start} {mid} {end}'
         while '  ' in final:
             final = final.replace('  ', ' ').strip()
 

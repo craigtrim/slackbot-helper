@@ -54,25 +54,25 @@ class BookOnlyBlock(BaseObject):
                            book_url: str) -> list:
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": primary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': primary_text
                 }
             },
             {
-                "type": "divider"
+                'type': 'divider'
             },
             {
-                "type": "actions",
-                "elements": [
+                'type': 'actions',
+                'elements': [
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": book_button_text
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': book_button_text
                         },
-                        "url": book_url
+                        'url': book_url
                     }
                 ]
             }
@@ -85,32 +85,32 @@ class BookOnlyBlock(BaseObject):
                         book_url: str) -> list:
         return [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": primary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': primary_text
                 }
             },
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": secondary_text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': secondary_text
                 }
             },
             {
-                "type": "divider"
+                'type': 'divider'
             },
             {
-                "type": "actions",
-                "elements": [
+                'type': 'actions',
+                'elements': [
                     {
-                        "type": "button",
-                        "text": {
-                            "type": "plain_text",
-                            "text": book_button_text
+                        'type': 'button',
+                        'text': {
+                            'type': 'plain_text',
+                            'text': book_button_text
                         },
-                        "url": book_url
+                        'url': book_url
                     }
                 ]
             }
@@ -139,8 +139,8 @@ class BookOnlyBlock(BaseObject):
             dict: the display block
         """
 
-        book_button_text = f"{self._find_emoji()} {book_button_text}"
-        primary_text = f"{self._target_users} {primary_text}"
+        book_button_text = f'{self._find_emoji()} {book_button_text}'
+        primary_text = f'{self._target_users} {primary_text}'
 
         def decide() -> list:
             if secondary_text and len(secondary_text):

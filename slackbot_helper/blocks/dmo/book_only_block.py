@@ -78,13 +78,13 @@ class BookOnlyBlock(BaseObject):
             {
                 "type": "divider"
             },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": book_name
-                }
-            },
+            # {
+            #     "type": "section",
+            #     "text": {
+            #         "type": "mrkdwn",
+            #         "text": book_name
+            #     }
+            # },
             {
                 "type": "actions",
                 "elements": [
@@ -124,13 +124,13 @@ class BookOnlyBlock(BaseObject):
             {
                 "type": "divider"
             },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": book_name
-                }
-            },
+            # {
+            #     "type": "section",
+            #     "text": {
+            #         "type": "mrkdwn",
+            #         "text": book_name
+            #     }
+            # },
             {
                 "type": "actions",
                 "elements": [

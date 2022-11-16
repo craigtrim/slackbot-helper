@@ -70,7 +70,8 @@ class BookOnlyBlock(BaseObject):
                         'type': 'button',
                         'text': {
                             'type': 'plain_text',
-                            'text': book_button_text
+                            'text': book_button_text,
+                            'emojis': True
                         },
                         'url': book_url
                     }
@@ -108,7 +109,8 @@ class BookOnlyBlock(BaseObject):
                         'type': 'button',
                         'text': {
                             'type': 'plain_text',
-                            'text': book_button_text
+                            'text': book_button_text,
+                            'emojis': True
                         },
                         'url': book_url
                     }

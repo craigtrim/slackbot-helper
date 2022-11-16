@@ -77,6 +77,12 @@ class FuzzyMatchHighlighter(BaseObject):
             Optional[str]: a highlighted string (if any)
         """
 
+        if not tokens_1 or not len(tokens_1):
+            return None
+
+        if not tokens_2 or not len(tokens_2):
+            return None
+
         d_similar = self._most_similar_phrase(
             tokens_1=tokens_1,
             tokens_2=tokens_2)

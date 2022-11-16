@@ -43,6 +43,11 @@ class StandardTextBlock(BaseObject):
             craigtrim@gmail.com
             *   renamed from 'create-outgoing-event' in pursuit of
                 https://github.com/craigtrim/slackbot-helper/issues/2
+        Updated:
+            16-Nov-2022
+            craigtrim@gmail.com
+            *   alt-text is a mandatory attribute with mandatory (non-null, non-empty) value
+                https://github.com/craigtrim/slackbot-helper/issues/7
         """
         BaseObject.__init__(self, __name__)
 
@@ -78,7 +83,7 @@ class StandardTextBlock(BaseObject):
                 'accessory': {
                     'type': 'image',
                     'image_url': url,
-                    'alt_text': None
+                    'alt_text': text  # mandatory; slackbot-helper/issues/7
                 }
             }
         ]

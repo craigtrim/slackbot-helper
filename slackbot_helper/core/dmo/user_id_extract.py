@@ -65,6 +65,10 @@ class UserIdExtract(BaseObject):
         if '@' not in message_text:
             return None
 
+        if '<@' in message_text:
+            message_text = message_text.replace('<@', '@')
+            message_text = message_text.replace('>', '')
+
         lines = [x for x in message_text.split('@') if len(x)]
         lines = [x.split(' ')[0] for x in lines]
 
@@ -89,6 +93,10 @@ class UserIdExtract(BaseObject):
 
                     if 'elements' in block:
                         for element in block['elements']:
+
+                            if 'elements' not in element:
+                                continue
+
                             for inner in element['elements']:
                                 if inner['type'] == 'user':
                                     if inner['user_id'] not in user_ids:
@@ -99,8 +107,8 @@ class UserIdExtract(BaseObject):
                             log_error('Event Structure Not Recognized')
                             raise NotImplementedError
 
-                        extracted_ids = self._extract_ids(
-                            block['text']['text'])
+                        block_text = block['text']['text']
+                        extracted_ids = self._extract_ids(block_text)
                         if extracted_ids:  # slackbot-helper/issues/5
                             [user_ids.append(x) for x in extracted_ids]
 
@@ -150,6 +158,7 @@ class UserIdExtract(BaseObject):
         sw = Stopwatch()
 
         results = self._process(d_event)
+
         if results:
             results = [self._cleanse(x) for x in results]
             results = [x.strip() for x in results if x and len(x)]

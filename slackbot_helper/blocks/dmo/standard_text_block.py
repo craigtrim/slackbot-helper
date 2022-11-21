@@ -48,6 +48,11 @@ class StandardTextBlock(BaseObject):
             craigtrim@gmail.com
             *   alt-text is a mandatory attribute with mandatory (non-null, non-empty) value
                 https://github.com/craigtrim/slackbot-helper/issues/7
+        Updated:
+            21-Nov-2022
+            craigtrim@gmail.com
+            *   fix concatendation defect
+                https://github.com/craigtrim/slackbot-helper/issues/8
         """
         BaseObject.__init__(self, __name__)
 
@@ -109,7 +114,8 @@ class StandardTextBlock(BaseObject):
         if not output_text or not len(output_text):
             return None
 
-        output_text = f'{target_users} {output_text}'
+        if target_users and len(target_users):  # slackbot-helper/issues/8
+            output_text = f'{target_users} {output_text}'
 
         def get_blocks() -> list:
             if 'https:' not in output_text:

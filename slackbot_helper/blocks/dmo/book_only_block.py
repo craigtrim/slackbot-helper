@@ -32,6 +32,11 @@ class BookOnlyBlock(BaseObject):
             craigtrim@gmail.com
             *   created in pursuit of
                 https://github.com/craigtrim/slackbot-helper/issues/2
+        Updated:
+            21-Nov-2022
+            craigtrim@gmail.com
+            *   fix concatendation defect
+                https://github.com/craigtrim/slackbot-helper/issues/8
 
         Args:
             emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
@@ -141,8 +146,14 @@ class BookOnlyBlock(BaseObject):
             dict: the display block
         """
 
-        book_button_text = f'{self._find_emoji()} {book_button_text}'
-        primary_text = f'{self._target_users} {primary_text}'
+        emoji = self._find_emoji()
+
+        if emoji and len(emoji):  # slackbot-helper/issues/8
+            book_button_text = f'{emoji} {book_button_text}'
+
+        # slackbot-helper/issues/8
+        if self._target_users and len(self._target_users):
+            primary_text = f'{self._target_users} {primary_text}'
 
         def decide() -> list:
             if secondary_text and len(secondary_text):

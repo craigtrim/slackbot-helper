@@ -39,6 +39,11 @@ class ChapterAndPageBlock(BaseObject):
             craigtrim@gmail.com
             *   further refactoring in pursuit of
                 https://github.com/craigtrim/slackbot-helper/issues/2
+        Updated:
+            21-Nov-2022
+            craigtrim@gmail.com
+            *   fix concatendation defect
+                https://github.com/craigtrim/slackbot-helper/issues/8
 
         Args:
             emojis (Optional[List[str]], optional): list of emojis to use in display block. Defaults to None.
@@ -207,7 +212,9 @@ class ChapterAndPageBlock(BaseObject):
             dict: the display block
         """
 
-        primary_text = f'{self._target_users} {primary_text}'.strip()
+        # slackbot-helper/issues/8
+        if self._target_users and len(self._target_users):
+            primary_text = f'{self._target_users} {primary_text}'.strip()
 
         book_name_text = self._book_name_text(
             book_name=book_name,

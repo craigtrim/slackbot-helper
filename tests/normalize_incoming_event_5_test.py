@@ -11,23 +11,23 @@ from slackbot_helper.core.dto import SlackIds
 d_incoming = {
     'blocks': [
         {
-            'block_id': '2YJR',
+            'block_id': 'HR0',
             'text': {
                 'emoji': True,
-                'text': 'Note my conduct.',
+                'text': 'Keep an eye on my moves.',
                 'type': 'plain_text'
             },
             'type': 'section'
         },
         {
-            'block_id': 'u31',
+            'block_id': 'cWmZy',
             'type': 'divider'
         },
         {
-            'block_id': 'Ts06',
+            'block_id': 'PSs',
             'elements': [
                 {
-                    'text': '<@U04HLMTUDSR> Show me images of spaceships.',
+                    'text': '<@U04HLMTUDSR> Show me everything with sun in it.',
                     'type': 'mrkdwn',
                     'verbatim': False
                 }
@@ -38,7 +38,7 @@ d_incoming = {
     'channel': 'C04LPA56H8C',
     'team': 'T045AR44M70',
     'text': "This content can't be displayed.",
-    'ts': 1675049179.061859,
+    'ts': 1675053514.430099,
     'type': 'app_mention',
     'user': 'U04LRAW3G0K'
 }
@@ -50,8 +50,8 @@ d_normalized_expected = {
         ],
         'meta_mode': 'human2bot',
         'meta_type': 'H2B_SINGLE',
-        'text_1': 'Note my conduct. <@U04HLMTUDSR> Show me images of spaceships.',
-        'text_2': 'Note my conduct. Show me images of spaceships.',
+        'text_1': 'Keep an eye on my moves. <@U04HLMTUDSR> Show me everything with sun in it.',
+        'text_2': 'Keep an eye on my moves. Show me everything with sun in it.',
         'user_all': [
             'U04HLMTUDSR'
         ],
@@ -61,23 +61,23 @@ d_normalized_expected = {
     'event': {
         'blocks': [
             {
-                'block_id': '2YJR',
+                'block_id': 'HR0',
                 'text': {
                     'emoji': True,
-                    'text': 'Note my conduct.',
+                    'text': 'Keep an eye on my moves.',
                     'type': 'plain_text'
                 },
                 'type': 'section'
             },
             {
-                'block_id': 'u31',
+                'block_id': 'cWmZy',
                 'type': 'divider'
             },
             {
-                'block_id': 'Ts06',
+                'block_id': 'PSs',
                 'elements': [
                     {
-                        'text': '<@U04HLMTUDSR> Show me images of spaceships.',
+                        'text': '<@U04HLMTUDSR> Show me everything with sun in it.',
                         'type': 'mrkdwn',
                         'verbatim': False
                     }
@@ -123,6 +123,8 @@ def test_orchestrator():
 def test_root_init():
 
     d_normalized = normalize_event(d_event=d_incoming, bot_ids=slack_ids())
+
+    pprint(d_normalized)
 
     # the 'membership' value is dynamically generated
     # so we can't test as-is ...

@@ -52,6 +52,11 @@ class MessageTextExtract(BaseObject):
             craigtrim@gmail.com
             *   fix block extraction defect
                 https://github.com/craigtrim/slackbot-helper/issues/6
+        Updated:
+            29-Jan-2023
+            craigtrim@gmail.com
+            *   update text extraction routine
+                https://github.com/craigtrim/slackbot-helper/issues/10
         """
         BaseObject.__init__(self, __name__)
 
@@ -75,25 +80,29 @@ class MessageTextExtract(BaseObject):
                 if 'elements' in block:
                     for element in block['elements']:
 
-                        if 'elements' not in element:
-                            continue  # slackbot-helper/issues/6
+                        # slackbot-helper/issues/6; negative check for 'elements'
+                        # slackbot-helper/issues/10; positive check for 'text'
+                        if 'elements' not in element and 'text' in element:
+                            if element['type'] in self.__known_text_types:
+                                message.append(element['text'])
 
-                        for inner in element['elements']:
+                        else:
+                            for inner in element['elements']:
 
-                            if inner['type'] in self.__known_text_types:
-                                message.append(inner['text'])
+                                if inner['type'] in self.__known_text_types:
+                                    message.append(inner['text'])
 
-                            elif inner['type'] == 'user':
-                                message.append(f"@{inner['user_id']}")
+                                elif inner['type'] == 'user':
+                                    message.append(f"@{inner['user_id']}")
 
-                            elif inner['type'] == 'emoji':
-                                pass  # GRAFFL-255; can likely just ignore this
+                                elif inner['type'] == 'emoji':
+                                    pass  # GRAFFL-255; can likely just ignore this
 
-                            elif inner['type'] == 'link':
-                                pass  # GRAFFL-395; can likely just ignore this
+                                elif inner['type'] == 'link':
+                                    pass  # GRAFFL-395; can likely just ignore this
 
-                            else:
-                                raise NotImplementedError(inner['type'])
+                                else:
+                                    raise NotImplementedError(inner['type'])
 
                 if 'text' in block:  # slackbot-helper/issues/1
                     if 'text' not in block['text']:

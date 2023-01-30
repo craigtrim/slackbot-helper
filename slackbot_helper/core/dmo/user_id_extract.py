@@ -93,9 +93,16 @@ class UserIdExtract(BaseObject):
 
                     if 'elements' in block:
                         for element in block['elements']:
-
                             if 'elements' not in element and 'text' in element:
-                                tokens = element['text'].split()
+
+                                def get_element_text() -> str:
+                                    if type(element['text']) == str:
+                                        return element['text']
+                                    if type(element['text']) == dict and 'text' in element['text']:
+                                        return element['text']['text']
+                                    raise NotImplementedError
+
+                                tokens = get_element_text().split()
                                 if tokens[0].startswith('<@'):
                                     user_ids.append(tokens[0][2:-1])
 

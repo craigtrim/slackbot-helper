@@ -89,6 +89,7 @@ d_normalized_expected = {
         'team': 'T045AR44M70',
         'text': "This content can't be displayed.",
         'ts': 1665195085.499959,
+        'thread_ts': None,
         'type': 'app_mention',
         'user': 'U04LRAW3G0K'
     },

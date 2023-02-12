@@ -77,6 +77,7 @@ d_normalized_expected = {
         'team': 'T045AR44M70',
         'text': '<@U045HCSMG8K> dead ahead!',
         'ts': 1665195085.499959,
+        'thread_ts': None,
         'type': 'app_mention',
         'user': 'U04674UNRBJ'
     },

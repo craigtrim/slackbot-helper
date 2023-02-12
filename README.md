@@ -2,6 +2,10 @@
 
 Contains Utility Functions to help deal with Slack Events and I/O
 
+Slack Events structures are highly variable and deeply nested.
+
+This algorithm performs consistent extraction of the core key:value pairs.
+
 ## Usage
 Assume this incoming event:
 ```python

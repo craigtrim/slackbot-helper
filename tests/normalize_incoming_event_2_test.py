@@ -97,6 +97,7 @@ d_event_expected = {
         'team': 'T045AR44M70',
         'text': '<@U046G4FURQT> please ask <@U045HCSMG8K> a random question',
         'ts': 1665723755.778069,
+        'thread_ts': None,
         'type': 'app_mention',
         'user': 'U04674UNRBJ'
     },

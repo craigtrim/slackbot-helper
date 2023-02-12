@@ -54,6 +54,7 @@ d_event_expected = {
         'team': 'T045AR44M70',
         'text': '<@U045HCSMG8K> How long can particulate pollution remain airborne?',
         'ts': 1665724403.461959,
+        'thread_ts': None,
         'type': 'app_mention',
         'user': 'U046G4FURQT'
     },

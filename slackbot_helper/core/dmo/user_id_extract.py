@@ -71,6 +71,7 @@ class UserIdExtract(BaseObject):
 
         lines = [x for x in message_text.split('@') if len(x)]
         lines = [x.split(' ')[0] for x in lines]
+        lines = [x for x in lines if len(x) >= 10]
 
         return lines
 

@@ -42,6 +42,21 @@ class TransformIncomingEvent(BaseObject):
         """
         BaseObject.__init__(self, __name__)
 
+    # slackbot-helper/issues/11
+    @staticmethod
+    def _thread_ts(d_event: dict) -> Optional[float]:
+        if 'thread_ts' not in d_event:
+            return None
+        if d_event['thread_ts'] is None:
+            return None
+        if d_event['thread_ts'] == 'None':
+            return None
+
+        try:
+            return float(d_event['thread_ts'])
+        except ValueError:
+            return None
+
     def process(self,
                 d_event: IncomingEvent) -> NormalizedEvent:
         """ Transform and Validate Incoming Event
@@ -56,17 +71,12 @@ class TransformIncomingEvent(BaseObject):
             dict: validated slack event
         """
 
-        # # slackbot-helper/issues/11
-        def get_thread_ts() -> Optional[float]:
-            if 'thread_ts' in d_event:
-                return float(d_event['thread_ts'])
-
         d = {
             'type': d_event['type'],
             'text': d_event['text'],
             'user': d_event['user'],
             'ts': float(d_event['ts']),
-            'thread_ts': get_thread_ts(),
+            'thread_ts': self._thread_ts(d_event),
             'team': d_event['team'],
             'channel': d_event['channel'],
         }

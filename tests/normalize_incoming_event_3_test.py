@@ -20,7 +20,6 @@ d_event_incoming = {
         }
     ],
     'channel': 'C046DB9TLEL',
-    'team': 'T045AR44M70',
     'text': '<@U045HCSMG8K> How long can particulate pollution remain airborne?',
     'ts': 1665724403.461959,
     'type': 'app_mention',
@@ -51,7 +50,6 @@ d_event_expected = {
             }
         ],
         'channel': 'C046DB9TLEL',
-        'team': 'T045AR44M70',
         'text': '<@U045HCSMG8K> How long can particulate pollution remain airborne?',
         'ts': 1665724403.461959,
         'thread_ts': None,

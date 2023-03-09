@@ -36,7 +36,6 @@ d_incoming = {
         }
     ],
     'channel': 'C04LPA56H8C',
-    'team': 'T045AR44M70',
     'text': "This content can't be displayed.",
     'ts': 1675053514.430099,
     'type': 'app_mention',
@@ -86,7 +85,6 @@ d_normalized_expected = {
             }
         ],
         'channel': 'C04LPA56H8C',
-        'team': 'T045AR44M70',
         'text': "This content can't be displayed.",
         'ts': 1665195085.499959,
         'thread_ts': None,

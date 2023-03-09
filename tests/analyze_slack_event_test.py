@@ -39,7 +39,6 @@ d_event_incoming = {
     'channel': 'C046DB9TLEL',
     'client_msg_id': 'bd324672-9e87-4629-af81-aaa4d701082b',
     'event_ts': '1665723755.778069',
-    'team': 'T045AR44M70',
     'text': '<@U046G4FURQT> please ask <@U045HCSMG8K> a random question',
     'ts': '1665723755.778069',
     'type': 'app_mention',

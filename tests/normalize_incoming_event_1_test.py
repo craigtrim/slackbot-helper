@@ -29,7 +29,6 @@ d_incoming = {
         }
     ],
     'channel': 'C046DB9TLEL',
-    'team': 'T045AR44M70',
     'text': '<@U045HCSMG8K> dead ahead!',
     'ts': 1665195085.499959,
     'type': 'app_mention',
@@ -74,7 +73,6 @@ d_normalized_expected = {
             }
         ],
         'channel': 'C046DB9TLEL',
-        'team': 'T045AR44M70',
         'text': '<@U045HCSMG8K> dead ahead!',
         'ts': 1665195085.499959,
         'thread_ts': None,

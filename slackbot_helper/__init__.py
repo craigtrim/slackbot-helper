@@ -42,7 +42,6 @@ def normalize_event(d_event: dict,
                     }
                 ],
                 'channel': 'C046DB9TLEL',
-                'team': 'T045AR44M70',
                 'text': '<@U045HCSMG8K> dead ahead!',
                 'ts': 1665195085.499959,
                 'type': 'app_mention',

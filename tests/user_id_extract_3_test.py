@@ -19,7 +19,6 @@ d_event = {
         }
     ],
     'channel': 'C04M19F0JSG',
-    'team': 'T045AR44M70',
     'text': "I'm unmotivated. <@U045HCSMG8K> What kind of damage does strip mining cause to the environment?",
     'thread_ts': 1676258041.705079,
     'ts': 1676258044.110549,

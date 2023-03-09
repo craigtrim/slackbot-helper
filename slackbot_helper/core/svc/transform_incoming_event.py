@@ -39,6 +39,10 @@ class TransformIncomingEvent(BaseObject):
             craigtrim@gmail.com
             *   capture thread-ts in normalized event
                 https://github.com/craigtrim/slackbot-helper/issues/11
+        Updated:
+            9-Mar-2023
+            craigtrim@gmail.com
+            *   remove 'team' from normalized event
         """
         BaseObject.__init__(self, __name__)
 
@@ -77,7 +81,6 @@ class TransformIncomingEvent(BaseObject):
             'user': d_event['user'],
             'ts': float(d_event['ts']),
             'thread_ts': self._thread_ts(d_event),
-            'team': d_event['team'],
             'channel': d_event['channel'],
         }
 
@@ -91,7 +94,6 @@ class TransformIncomingEvent(BaseObject):
             Enforcer.is_str(d['user'])
             Enforcer.is_float(d['ts'])
             Enforcer.is_optional_float(d['thread_ts'])
-            Enforcer.is_str(d['team'])
             Enforcer.is_str(d['channel'])
             if 'blocks' in d:
                 Enforcer.is_list(d['blocks'])

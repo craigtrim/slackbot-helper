@@ -59,7 +59,6 @@ d_event = {
         }
     ],
     'channel': 'C04BRFKKSNL',
-    'team': 'T045AR44M70',
     'text': "This content can't be displayed.",
     'ts': 1668625025.508569,
     'type': 'app_mention',

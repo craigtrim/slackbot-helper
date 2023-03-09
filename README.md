@@ -32,7 +32,6 @@ d_incoming = {
         }
     ],
     "channel": "C046DB9TLEL",
-    "team": "T045AR44M70",
     "text": "<@U045HCSMG8K> dead ahead!",
     "ts": 1665195085.499959,
     "type": "app_mention",
@@ -89,7 +88,6 @@ The output of this function is:
             }
         ],
         "channel": "C046DB9TLEL",
-        "team": "T045AR44M70",
         "text": "<@U045HCSMG8K> dead ahead!",
         "ts": 1665195085.499959,
         "type": "app_mention",

@@ -82,6 +82,12 @@ class AnalyzeSlackEvent(BaseObject):
         user_ids = self._extract_user_ids(d_event)
         message_text = self._extract_message_text(d_event)
 
+        if not len(user_ids):
+            self.logger.error('\n'.join([
+                'No User IDs Found',
+                pformat(d_event)]))
+            raise ValueError
+
         def get_target_user_id() -> str:
             if not user_ids:
                 return user_ids[-1]

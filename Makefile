@@ -25,7 +25,10 @@ install:
 	poetry lock
 	poetry update
 	poetry install
+	poetry run pre-commit run --all-files
+	poetry run flakeheaven lint
 	poetry run pre-commit install
+	poetry run pip freeze > requirements.txt
 
 test:
 	poetry run pytest --disable-pytest-warnings
@@ -37,15 +40,7 @@ build:
 	poetry build
 	make copy_setup
 
-linters:
-	poetry run pre-commit run --all-files
-	poetry run flakeheaven lint
-
-freeze:
-	poetry run pip freeze > requirements.txt
-	poetry run python -m pip install --upgrade pip
-
 all:
-	make linters
 	make build
 	make freeze
+	poetry run python -m pip install --upgrade pip

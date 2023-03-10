@@ -54,7 +54,7 @@ regex @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/47/69/3a/9
 requests @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/3d/1f/aa/5e8217c68413908512431e37461a959c5f978e280e5d533e90eb0bb47e/requests-2.28.2-py3-none-any.whl
 slack-bolt @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/e7/95/46/1aa4585609f2f1a53472e3257c6edb9e5b3c4477e6ac3193348bbd3998/slack_bolt-1.16.4-py2.py3-none-any.whl
 slack-sdk @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/d6/c4/72/d4eced480769a6e56a8965c93a6b8f70497278220ac2380f5098b5e212/slack_sdk-3.20.2-py2.py3-none-any.whl
-slackbot-helper==0.1.40
+slackbot-helper==0.1.41
 slackclient @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/1e/a2/c7/e480a2c98a94c5403f2d1725978b7b86c0940f4686c466e2c36d93f625/slackclient-2.9.4-py2.py3-none-any.whl
 smart-open @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/30/32/e9/ab66583097a65a77df1a12552d41587038be0d6162495c4e386f79c106/smart_open-6.3.0-py3-none-any.whl
 spacy @ file:///C:/Users/Craig/AppData/Local/pypoetry/Cache/artifacts/83/7c/74/f9b93f9c185c3a615dfdeac8ad9918edd4ddde6898dfaae3cce75cebd8/spacy-3.5.0-cp38-cp38-win_amd64.whl

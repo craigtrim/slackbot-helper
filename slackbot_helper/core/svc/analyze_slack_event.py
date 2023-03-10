@@ -3,15 +3,23 @@
 """ Analyze an Incoming Slack Event """
 
 
-from pprint import pformat, pprint
-from typing import Any, Dict
+from pprint import pformat
+from pprint import pprint
 
-from baseblock import BaseObject, Stopwatch
+from typing import Any
+from typing import Dict
+from typing import Optional
 
-from slackbot_helper.core.dmo import (MessageTextExtract, MessageTypeAnalysis,
-                                      UserIdExtract)
-from slackbot_helper.core.dto import (AnalyzedEvent, IncomingEvent,
-                                      MessageType, SlackIds)
+from baseblock import Stopwatch
+from baseblock import BaseObject
+
+from slackbot_helper.core.dmo import MessageTextExtract
+from slackbot_helper.core.dmo import MessageTypeAnalysis
+from slackbot_helper.core.dmo import UserIdExtract
+from slackbot_helper.core.dto import AnalyzedEvent
+from slackbot_helper.core.dto import IncomingEvent
+from slackbot_helper.core.dto import MessageType
+from slackbot_helper.core.dto import SlackIds
 
 
 class AnalyzeSlackEvent(BaseObject):
@@ -44,6 +52,10 @@ class AnalyzeSlackEvent(BaseObject):
             7-Oct-2022
             craigtrim@gmail.com
             *   refactored into 'slackbot-helper'
+        Updated:
+            10-Mar-2023
+            craigtrim@gmail.com
+            *   permit return None if no user_ids exist
 
         Args:
             bot_ids (SlackIds): a list of Bot IDs
@@ -71,7 +83,7 @@ class AnalyzeSlackEvent(BaseObject):
         return 'bot2bot'
 
     def _process(self,
-                 d_event: IncomingEvent) -> AnalyzedEvent:
+                 d_event: IncomingEvent) -> Optional[AnalyzedEvent]:
 
         def get_source_user_id() -> str:
             if 'user' in d_event:
@@ -83,10 +95,13 @@ class AnalyzeSlackEvent(BaseObject):
         message_text = self._extract_message_text(d_event)
 
         if not len(user_ids):
-            self.logger.error('\n'.join([
-                'No User IDs Found',
-                pformat(d_event)]))
-            raise ValueError
+            # not necessarily an error;
+            # this could be a bot addressing a human, but not prefixing any user id
+            if self.isEnabledForDebug:
+                self.logger.debug('\n'.join([
+                    'No User IDs Found',
+                    pformat(d_event)]))
+            return None
 
         def get_target_user_id() -> str:
             if not user_ids:

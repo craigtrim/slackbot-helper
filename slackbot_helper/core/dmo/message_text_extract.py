@@ -90,10 +90,12 @@ class MessageTextExtract(BaseObject):
                             for inner in element['elements']:
 
                                 if inner['type'] in self.__known_text_types:
-                                    message.append(inner['text'])
+                                    if 'text' in inner:  # some messages may have embedded images
+                                        message.append(inner['text'])
 
                                 elif inner['type'] == 'user':
-                                    message.append(f"@{inner['user_id']}")
+                                    if 'user_id' in inner:
+                                        message.append(f"@{inner['user_id']}")
 
                                 elif inner['type'] == 'emoji':
                                     pass  # GRAFFL-255; can likely just ignore this
